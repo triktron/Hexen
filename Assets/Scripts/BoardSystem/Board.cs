@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -6,8 +7,20 @@ using UnityEngine.Video;
 
 namespace BoardSystem
 {
+    public class PiecePlacedEventArgs<TPiece> : EventArgs where TPiece : class, IPiece
+    {
+        public TPiece Piece { get;  }
+
+        public PiecePlacedEventArgs(TPiece piece)
+        {
+            Piece = piece;
+        }
+    }
+
     public class Board<TPiece> where TPiece : class, IPiece
     {
+        public event EventHandler<PiecePlacedEventArgs<TPiece>> PiecePlaced;
+
         private Dictionary<Position, Tile> _tiles = new Dictionary<Position, Tile>();
 
         private List<Tile> _keys = new List<Tile>();
@@ -113,6 +126,8 @@ namespace BoardSystem
 
             _keys.Add(toTile);
             _values.Add(piece);
+
+            OnPiecePlaced(new PiecePlacedEventArgs<TPiece>(piece));
         }
 
         private void InitTiles()
@@ -124,6 +139,12 @@ namespace BoardSystem
                     _tiles.Add(new Position { X = x, Y = y }, new Tile(x, y));
                 }
             }
+        }
+
+        protected virtual void OnPiecePlaced(PiecePlacedEventArgs<TPiece> args)
+        {
+            EventHandler<PiecePlacedEventArgs<TPiece>> handler = PiecePlaced;
+            handler?.Invoke(this, args);
         }
     }
 }

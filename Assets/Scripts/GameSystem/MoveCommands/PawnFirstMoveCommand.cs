@@ -1,5 +1,6 @@
 ﻿using BoardSystem;
 using GameSystem.Modals;
+using ReplaySystem;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,10 @@ namespace GameSystem.MoveCommands
 {
     public class PawnFirstMoveCommand : AbstractBasicMoveCommand
     {
+        public PawnFirstMoveCommand(ReplayManager replayManager) : base(replayManager)
+        {
+        }
+
         public override List<Tile> Tiles(Board<ChessPiece> board, ChessPiece piece)
         {
             var tile = board.TileOf(piece);

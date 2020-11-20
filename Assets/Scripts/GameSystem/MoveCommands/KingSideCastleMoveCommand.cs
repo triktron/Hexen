@@ -3,11 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using BoardSystem;
 using GameSystem.Modals;
+using ReplaySystem;
 
 namespace GameSystem.MoveCommands
 {
     public class KingSideCastleMoveCommand : AbstractBasicMoveCommand
     {
+        public KingSideCastleMoveCommand(ReplayManager replayManager) : base(replayManager)
+        {
+        }
+
         public override bool CanExecute(Board<ChessPiece> board, ChessPiece piece)
         {
             if (piece.HasMoved) return false;

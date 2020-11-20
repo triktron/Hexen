@@ -3,6 +3,7 @@ using GameSystem.Modals;
 using GameSystem.MoveCommandsProviders;
 using GameSystem.Views;
 using MoveSystem;
+using ReplaySystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,6 +23,8 @@ namespace GameSystem
 
         private int _currentPlayerID;
         public int CurrentPlayerID => _currentPlayerID;
+
+        public ReplayManager ReplayManager { get; set; } = new ReplayManager();
 
         private void Start()
         {
@@ -60,12 +63,12 @@ namespace GameSystem
         private void Awake()
         {
             MoveManager = new MoveManager<ChessPiece>(Board);
-            MoveManager.Register(PawnMoveCommandProvider.Name, new PawnMoveCommandProvider());
-            MoveManager.Register(KnightMoveCommandProvider.Name, new KnightMoveCommandProvider());
-            MoveManager.Register(BishopMoveCommandProvider.Name, new BishopMoveCommandProvider());
-            MoveManager.Register(RookMoveCommandProvider.Name, new RookMoveCommandProvider());
-            MoveManager.Register(KingMoveCommandProvider.Name, new KingMoveCommandProvider());
-            MoveManager.Register(QueenMoveCommandProvider.Name, new QueenMoveCommandProvider());
+            MoveManager.Register(PawnMoveCommandProvider.Name, new PawnMoveCommandProvider(ReplayManager));
+            MoveManager.Register(KnightMoveCommandProvider.Name, new KnightMoveCommandProvider(ReplayManager));
+            MoveManager.Register(BishopMoveCommandProvider.Name, new BishopMoveCommandProvider(ReplayManager));
+            MoveManager.Register(RookMoveCommandProvider.Name, new RookMoveCommandProvider(ReplayManager));
+            MoveManager.Register(KingMoveCommandProvider.Name, new KingMoveCommandProvider(ReplayManager));
+            MoveManager.Register(QueenMoveCommandProvider.Name, new QueenMoveCommandProvider(ReplayManager));
 
             MoveManager.MoveComandProviderChanged += OnMoveComandManagerChanged;
         }
@@ -138,6 +141,16 @@ namespace GameSystem
             var tiles = _currentMoveComand.Tiles(Board, _selectedPiece);
 
             Board.UnHightlight(tiles);
+        }
+
+        public void Forward()
+        {
+            ReplayManager.Forward();
+        }
+
+        public void Backward()
+        {
+            ReplayManager.Backward();
         }
     }
 

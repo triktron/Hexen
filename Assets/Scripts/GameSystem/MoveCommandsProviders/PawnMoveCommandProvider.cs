@@ -5,6 +5,7 @@ using GameSystem.Modals;
 using System.Collections.Generic;
 using BoardSystem;
 using GameSystem.MoveCommands;
+using ReplaySystem;
 
 namespace GameSystem.MoveCommandsProviders
 {
@@ -12,7 +13,7 @@ namespace GameSystem.MoveCommandsProviders
     {
         public static readonly string Name = "Pawn";
 
-        public PawnMoveCommandProvider() : base(new PawnBasicMoveCommand(), new PawnFirstMoveCommand())
+        public PawnMoveCommandProvider(ReplayManager replayManager) : base(new PawnBasicMoveCommand(replayManager), new PawnFirstMoveCommand(replayManager))
         {
         }
     }
