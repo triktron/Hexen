@@ -3224,6 +3224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c7991adef96d6848b1effea8408a692, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _chessPieceViewFactory: {fileID: 11400000, guid: daf0ad1fc2fa88345ae69dd9dd20ed0f, type: 2}
 --- !u!4 &1023644559
 Transform:
   m_ObjectHideFlags: 0
@@ -4158,7 +4159,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1344836539}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1392736994}
+        m_TargetAssemblyTypeName: GameSystem.GameLoop, GameSystem
+        m_MethodName: Backward
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1344836539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5374,7 +5387,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1689981633}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1392736994}
+        m_TargetAssemblyTypeName: GameSystem.GameLoop, GameSystem
+        m_MethodName: Forward
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1689981633
 MonoBehaviour:
   m_ObjectHideFlags: 0

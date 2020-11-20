@@ -7,6 +7,8 @@ namespace GameSystem.Views
 {
     public class BoardView : MonoBehaviour
     {
+        [SerializeField]
+        private ChessViewViewFactory _chessPieceViewFactory = null;
 
         // Use this for initialization
         void Start()
@@ -30,7 +32,13 @@ namespace GameSystem.Views
             var board = sender as Board<ChessPiece>;
 
             var position = board.TileOf(e.Piece);
+            var piece = e.Piece;
+            var gameLoop = GameLoop.Instance;
 
+            var movementManager = gameLoop.MoveManager;
+            var movementName = movementManager.MovementOf(piece);
+
+            _chessPieceViewFactory.CreateChessPieceView(board, piece, movementName);
 
         }
     }

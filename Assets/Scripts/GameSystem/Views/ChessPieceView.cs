@@ -46,7 +46,7 @@ namespace GameSystem.Views
 
         private void ModalCaptured(object sender, EventArgs e)
         {
-            Destroy(gameObject);
+            Destroy(gameObject.transform.parent.gameObject);
         }
 
         private void ModalMoved(object sender, ChessPieceMovedEventArgs e)

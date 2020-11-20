@@ -53,7 +53,7 @@ namespace GameSystem.Modals
         protected virtual void OnChessPieceCaptured()
         {
             EventHandler handler = ChessPieceCaptured;
-            handler.Invoke(this, EventArgs.Empty);
+            handler?.Invoke(this, EventArgs.Empty);
         }
     }
 }

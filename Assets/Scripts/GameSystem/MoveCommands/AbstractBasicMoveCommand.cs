@@ -28,6 +28,7 @@ namespace GameSystem.MoveCommands
         {
             var toPiece = board.PieceAt(toTile);
             var fromTile = board.TileOf(piece);
+            var hasMoved = piece.HasMoved;
 
             Action forward = () =>
             {
@@ -44,7 +45,7 @@ namespace GameSystem.MoveCommands
 
             Action backward = () =>
             {
-                piece.HasMoved = false;
+                piece.HasMoved = hasMoved;
                 board.Move(toTile, fromTile);
                 if (toPiece != null)
                 {

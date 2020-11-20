@@ -35,6 +35,11 @@ namespace MoveSystem
             _board = board;
         }
 
+        public string MovementOf(TPiece piece)
+        {
+            return _pieceMovements[piece];
+        }
+
         public void Register(string name, IMoveCommandProvider<TPiece> provider)
         {
             if (_providers.ContainsKey(name))
