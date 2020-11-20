@@ -66,6 +66,8 @@ namespace GameSystem
             MoveManager.Register(RookMoveCommandProvider.Name, new RookMoveCommandProvider());
             MoveManager.Register(KingMoveCommandProvider.Name, new KingMoveCommandProvider());
             MoveManager.Register(QueenMoveCommandProvider.Name, new QueenMoveCommandProvider());
+
+            MoveManager.MoveComandProviderChanged += OnMoveComandManagerChanged;
         }
 
         public void Select(ChessPiece chessPiece)
@@ -79,7 +81,9 @@ namespace GameSystem
                 return;
             }
 
-            //Board.UnHightlight(MoveManager.Tiles());
+            
+            MoveManager.Deactivate();
+
 
             _selectedPiece = chessPiece;
 
@@ -92,7 +96,10 @@ namespace GameSystem
         {
             if (_selectedPiece != null && _currentMoveComand != null)
             {
-                Board.UnHightlight(_currentMoveComand.Tiles(Board, _selectedPiece));
+                var tiles = _currentMoveComand.Tiles(Board, _selectedPiece);
+                if (!tiles.Contains(tile)) return;
+
+                Board.UnHightlight(tiles);
 
                 _currentMoveComand.Execute(Board, _selectedPiece, tile);
 
@@ -123,6 +130,14 @@ namespace GameSystem
         {
             EventHandler handler = Initialized;
             handler?.Invoke(this, arg);
+        }
+
+        private void OnMoveComandManagerChanged(object sender, MoveCommandProviderChanged<ChessPiece> e)
+        {
+            if (_currentMoveComand == null || _selectedPiece == null) return;
+            var tiles = _currentMoveComand.Tiles(Board, _selectedPiece);
+
+            Board.UnHightlight(tiles);
         }
     }
 
