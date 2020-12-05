@@ -9,6 +9,8 @@ namespace ReplaySystem
         private List<IReplayebleComand> _commands = new List<IReplayebleComand>();
         private int _seekPosition = -1;
 
+        public bool isAtEnd => _commands.Count == _seekPosition + 1;
+
         public void Execute(IReplayebleComand comand)
         {
             var wasAtEnd = (_commands.Count == _seekPosition + 1);

@@ -7,6 +7,7 @@ using BoardSystem;
 using GameSystem.MoveCommands;
 using Utils;
 using ReplaySystem;
+using GameSystem.States;
 
 namespace GameSystem.MoveCommandsProviders
 {
@@ -15,7 +16,7 @@ namespace GameSystem.MoveCommandsProviders
     {
         public const string Name = "Rook";
 
-        public RookMoveCommandProvider(ReplayManager replayManager) : base(new RookBasicMoveCommand(replayManager))
+        public RookMoveCommandProvider(PlayGameState playGameState, ReplayManager replayManager) : base(playGameState, new RookBasicMoveCommand(replayManager))
         {
         }
     }

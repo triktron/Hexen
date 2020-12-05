@@ -37,11 +37,8 @@ namespace GameSystem.Views
 
             if (e.MoveCommandProvider != null)
             {
-                var board = GameLoop.Instance.Board;
-                var piece = GameLoop.Instance.SelectedPiece;
                 foreach (var moveComand in e.MoveCommandProvider.MoveCommands())
                 {
-                    if (!moveComand.CanExecute(board, piece)) continue;
                     var view = GameObject.Instantiate(_moveComandView, transform);
 
                     view.Modal = moveComand;
