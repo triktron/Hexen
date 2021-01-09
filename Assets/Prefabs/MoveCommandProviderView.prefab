@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8970911717707861431}
   - component: {fileID: 4911993423130018379}
   - component: {fileID: 2596174320606369128}
+  - component: {fileID: 1817551424464642798}
   m_Layer: 5
   m_Name: MoveCommandProviderView
   m_TagString: Untagged
@@ -62,6 +63,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.392}
   m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -88,8 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8caea0433d59e424d933d7b655544e6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveComandView: {fileID: 6804700110638209532, guid: da73e8fe6746da941bf464ef38bb7906,
-    type: 3}
+  _moveComandView: {fileID: 6804700110638209532, guid: da73e8fe6746da941bf464ef38bb7906, type: 3}
 --- !u!114 &2596174320606369128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,3 +116,19 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0
+--- !u!114 &1817551424464642798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5565431072970492286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68f0b4e8f61a5924185fb4cb65e94916, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _amount: 10
+  _pooledObject: {fileID: 8246934551399534236, guid: da73e8fe6746da941bf464ef38bb7906, type: 3}
+  _parent: {fileID: 6313391719091023224}

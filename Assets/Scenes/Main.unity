@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 506012}
   m_Layer: 0
   m_Name: ---dark pieces---
-  m_TagString: Untagged
+  m_TagString: EditorOnly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6093,7 +6093,7 @@ GameObject:
   - component: {fileID: 1845665688}
   m_Layer: 0
   m_Name: ---light  pieces---
-  m_TagString: Untagged
+  m_TagString: EditorOnly
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7113,6 +7113,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1170250444}
     m_Modifications:
+    - target: {fileID: 1817551424464642798, guid: 0f05db3d8fa51cb41a110f0ecbb9347b, type: 3}
+      propertyPath: _amount
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2596174320606369128, guid: 0f05db3d8fa51cb41a110f0ecbb9347b, type: 3}
+      propertyPath: m_ReverseArrangement
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5565431072970492286, guid: 0f05db3d8fa51cb41a110f0ecbb9347b, type: 3}
       propertyPath: m_Name
       value: MoveCommandProviderView
