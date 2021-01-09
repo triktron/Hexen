@@ -14,19 +14,15 @@ namespace GameSystem.Views
 
         private List<MoveComandView> _moveComandsViews = new List<MoveComandView>();
 
-        private void Start()
+        public IMoveCommandProvider<ChessPiece> Modal
         {
-            GameLoop.Instance.Initialized += OnGameInitialized;
+            set
+            {
+                UpdateCommandProviderViews(value);
+            }
         }
 
-        private void OnGameInitialized(object sender, EventArgs e)
-        {
-            var moveManager = GameLoop.Instance.MoveManager;
-
-            moveManager.MoveComandProviderChanged += OnMoveManagerProviderChanged;
-        }
-
-        private void OnMoveManagerProviderChanged(object sender, MoveCommandProviderChanged<ChessPiece> e)
+        private void UpdateCommandProviderViews(IMoveCommandProvider<ChessPiece> moveCommandProvider)
         {
             foreach (var moveComandView in _moveComandsViews)
             {
@@ -35,9 +31,9 @@ namespace GameSystem.Views
 
             _moveComandsViews.Clear();
 
-            if (e.MoveCommandProvider != null)
+            if (moveCommandProvider != null)
             {
-                foreach (var moveComand in e.MoveCommandProvider.MoveCommands())
+                foreach (var moveComand in moveCommandProvider.MoveCommands())
                 {
                     var view = GameObject.Instantiate(_moveComandView, transform);
 

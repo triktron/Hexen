@@ -17,28 +17,11 @@ namespace GameSystem
 {
     public class GameLoop : MonoBehaviourSingleton<GameLoop>
     {
-        
-
-        public event EventHandler Initialized;
         public Board<ChessPiece> Board { get; } = new Board<ChessPiece>(8, 8);
 
         StateMachine<GameStateBase> _stateMachine;
 
-        private void Start()
-        {
-            ConnectViewaToModal();
-
-            StartCoroutine(OnPostStart());
-        }
-
-        private IEnumerator OnPostStart()
-        {
-            yield return new WaitForEndOfFrame();
-
-            OnInitialized(EventArgs.Empty);
-        }
-
-        private void ConnectViewaToModal()
+        private void ConnectChessPieceViews(MoveManager<ChessPiece> moveManager)
         {
             var pieceViews = FindObjectsOfType<ChessPieceView>();
 
@@ -48,40 +31,59 @@ namespace GameSystem
                 var boardPosition = BoardPositionHelper.WorldToBoardPosition(worldPosition);
                 var tile = Board.TileAt(boardPosition);
 
-                var piece = new ChessPiece(pieceView.PlayerID, pieceView.FacingBack);
+                var piece = new ChessPiece(pieceView.PlayerID, pieceView.FacingBack, pieceView.MovementName);
                 Board.Place(tile, piece);
-                MoveManager.Register(piece, pieceView.MovementName);
+                moveManager.Register(piece, pieceView.MovementName);
                 pieceView.Modal = piece;
             }
         }
-
-
-        public MoveManager<ChessPiece> MoveManager { get; internal set; }
 
         private void Awake()
         {
             ReplayManager replayManager = new ReplayManager();
             _stateMachine = new StateMachine<GameStateBase>();
 
-            MoveManager = new MoveManager<ChessPiece>(Board);
-            var playGameState =  new PlayGameState(Board, MoveManager);
+            var moveManager = new MoveManager<ChessPiece>(Board);
+
+            var playGameState = new PlayGameState(Board, moveManager);
             _stateMachine.RegisterState(GameStates.Play, playGameState);
             _stateMachine.RegisterState(GameStates.Replay, new ReplayGameState(replayManager));
             _stateMachine.MoveTo(GameStates.Play);
 
-            
-            MoveManager.Register(PawnMoveCommandProvider.Name, new PawnMoveCommandProvider(playGameState, replayManager));
-            MoveManager.Register(KnightMoveCommandProvider.Name, new KnightMoveCommandProvider(playGameState, replayManager));
-            MoveManager.Register(BishopMoveCommandProvider.Name, new BishopMoveCommandProvider(playGameState, replayManager));
-            MoveManager.Register(RookMoveCommandProvider.Name, new RookMoveCommandProvider(playGameState, replayManager));
-            MoveManager.Register(KingMoveCommandProvider.Name, new KingMoveCommandProvider(playGameState, replayManager));
-            MoveManager.Register(QueenMoveCommandProvider.Name, new QueenMoveCommandProvider(playGameState, replayManager));
+            moveManager.Register(PawnMoveCommandProvider.Name, new PawnMoveCommandProvider(playGameState, replayManager));
+            moveManager.Register(KnightMoveCommandProvider.Name, new KnightMoveCommandProvider(playGameState, replayManager));
+            moveManager.Register(BishopMoveCommandProvider.Name, new BishopMoveCommandProvider(playGameState, replayManager));
+            moveManager.Register(RookMoveCommandProvider.Name, new RookMoveCommandProvider(playGameState, replayManager));
+            moveManager.Register(KingMoveCommandProvider.Name, new KingMoveCommandProvider(playGameState, replayManager));
+            moveManager.Register(QueenMoveCommandProvider.Name, new QueenMoveCommandProvider(playGameState, replayManager));
+
+            ConnectMoveCommandProviderView(moveManager);
+            ConnectChessPieceViews(moveManager);
+            ConnectTileViews(Board);
+            ConnectBoardView(Board);
         }
 
-        protected virtual void OnInitialized(EventArgs arg)
+        private void ConnectBoardView(Board<ChessPiece> board)
         {
-            EventHandler handler = Initialized;
-            handler?.Invoke(this, arg);
+            var boardView = FindObjectOfType<BoardView>();
+            boardView.Modal = board;
+        }
+
+        private void ConnectTileViews(Board<ChessPiece> board)
+        {
+            var tileViews = FindObjectsOfType<TileView>();
+
+            foreach (var tileView in tileViews)
+            {
+                var tilePosition = BoardPositionHelper.WorldToBoardPosition(tileView.transform.position);
+                tileView.Modal = board.TileAt(tilePosition);
+            }
+        }
+
+        private void ConnectMoveCommandProviderView(MoveManager<ChessPiece> moveManager)
+        {
+            var moveCommandProviderView = FindObjectOfType<MoveCommandProviderView>();
+            moveManager.MoveComandProviderChanged += (sender, args) => moveCommandProviderView.Modal = args.MoveCommandProvider;
         }
 
         public void Select(ChessPiece chessPiece)

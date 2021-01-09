@@ -6,9 +6,9 @@ using BoardSystem;
 
 namespace BoardSystem
 {
-    public interface IPiece
+    public interface IPiece<TPiece> where TPiece : class, IPiece<TPiece>
     {
-        void Moved(Tile fromPosition, Tile toPosition);
-        void Captured();
+        void Moved(Board<TPiece> board, Tile fromPosition, Tile toPosition);
+        void Captured(Board<TPiece> board);
     }
 }

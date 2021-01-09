@@ -10,36 +10,34 @@ namespace GameSystem.Views
         [SerializeField]
         private ChessViewViewFactory _chessPieceViewFactory = null;
 
-        // Use this for initialization
-        void Start()
+        private Board<ChessPiece> _modal;
+        public Board<ChessPiece> Modal
         {
-            var gameLoop = GameLoop.Instance;
+            set
+            {
+                if (_modal != null)
+                    _modal.PiecePlaced -= OnPiecePlaced;
 
-            gameLoop.Initialized += OnGameInitialized;
-        }
+                _modal = value;
 
-        private void OnGameInitialized(object sender, EventArgs e)
-        {
-            var gameLoop = GameLoop.Instance;
+                if (_modal != null)
+                    _modal.PiecePlaced += OnPiecePlaced;
+            }
 
-            var board = gameLoop.Board;
-
-            board.PiecePlaced += OnPiecePlaced;
+            get => _modal;
         }
 
         private void OnPiecePlaced(object sender, PiecePlacedEventArgs<ChessPiece> e)
         {
             var board = sender as Board<ChessPiece>;
-
-            var position = board.TileOf(e.Piece);
             var piece = e.Piece;
-            var gameLoop = GameLoop.Instance;
 
-            var movementManager = gameLoop.MoveManager;
-            var movementName = movementManager.MovementOf(piece);
+            _chessPieceViewFactory.CreateChessPieceView(board, piece);
+        }
 
-            _chessPieceViewFactory.CreateChessPieceView(board, piece, movementName);
-
+        private void OnDestroy()
+        {
+            Modal = null;
         }
     }
 }

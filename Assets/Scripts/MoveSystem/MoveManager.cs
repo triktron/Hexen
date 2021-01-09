@@ -7,7 +7,7 @@ using System;
 
 namespace MoveSystem
 {
-    public class MoveCommandProviderChanged<TPiece> : EventArgs where TPiece : class, IPiece
+    public class MoveCommandProviderChanged<TPiece> : EventArgs where TPiece : class, IPiece<TPiece>
     {
         public IMoveCommandProvider<TPiece> MoveCommandProvider { get; }
 
@@ -17,7 +17,7 @@ namespace MoveSystem
         }
     }
 
-    public class MoveManager<TPiece> where TPiece : class, IPiece
+    public class MoveManager<TPiece> where TPiece : class, IPiece<TPiece>
     {
         public event EventHandler<MoveCommandProviderChanged<TPiece>> MoveComandProviderChanged;
 

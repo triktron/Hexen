@@ -9,17 +9,20 @@ namespace GameSystem.Modals
 {
     public class ChessPieceMovedEventArgs : EventArgs
     {
+        public Board<ChessPiece> Board { get; }
+
         public Tile From { get; }
         public Tile To { get; }
 
-        public ChessPieceMovedEventArgs(Tile from, Tile to)
+        public ChessPieceMovedEventArgs(Board<ChessPiece> board, Tile from, Tile to)
         {
+            Board = board;
             From = from;
             To = to;
         }
     }
 
-    public class ChessPiece : IPiece
+    public class ChessPiece : IPiece<ChessPiece>
     {
         public event EventHandler<ChessPieceMovedEventArgs> ChessPieceMoved;
         public event EventHandler ChessPieceCaptured;
@@ -29,17 +32,20 @@ namespace GameSystem.Modals
         public int PlayerID { get; }
         public bool FacingBack { get; }
 
-        public ChessPiece(int playerID, bool facingBack)
+        public string MovementName  { get; internal set; }
+
+        public ChessPiece(int playerID, bool facingBack, string name)
         {
             PlayerID = playerID;
             FacingBack = facingBack;
+            MovementName = name;
         }
 
-        void IPiece.Moved(Tile fromPosition, Tile toPosition)
+        void IPiece<ChessPiece>.Moved(Board<ChessPiece> board, Tile fromPosition, Tile toPosition)
         {
-            OnChessPieceMoved(new ChessPieceMovedEventArgs(fromPosition, toPosition));
+            OnChessPieceMoved(new ChessPieceMovedEventArgs(board, fromPosition, toPosition));
         }
-        void IPiece.Captured()
+        void IPiece<ChessPiece>.Captured(Board<ChessPiece> board)
         {
             OnChessPieceCaptured();
         }

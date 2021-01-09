@@ -19,17 +19,17 @@ namespace GameSystem.Views
         [SerializeField]
         private List<string> _movementNames = new List<string>();
 
-        public ChessPieceView CreateChessPieceView(Board<ChessPiece> board, ChessPiece modal, string movementName)
+        public ChessPieceView CreateChessPieceView(Board<ChessPiece> board, ChessPiece modal)
         {
             var list = modal.PlayerID == 0 ? _lightChessPieceViews : _darkChessPieceViews;
 
-            var index = _movementNames.IndexOf(movementName);
+            var index = _movementNames.IndexOf(modal.MovementName);
             var prefab = list[index];
             var gameObject = Instantiate(prefab);
             var chessPieceView = gameObject.GetComponentInChildren<ChessPieceView>();
             var tile = board.TileOf(modal);
             gameObject.transform.position = BoardPositionHelper.BoardToWorldPosition(tile.Position);
-            gameObject.name = $"Spauwned chess piece ( { movementName } )";
+            gameObject.name = $"Spauwned chess piece ( { modal.MovementName } )";
             chessPieceView.Modal = modal;
 
             return chessPieceView;

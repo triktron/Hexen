@@ -37,16 +37,8 @@ namespace GameSystem.Views
 
         void Start()
         {
-            GameLoop.Instance.Initialized += OnGameInitialized;
-
             _meshRenderer = GetComponent<MeshRenderer>();
             _origianlMaterial = _meshRenderer.sharedMaterial;
-        }
-
-        private void OnGameInitialized(object sender, EventArgs e)
-        {
-            var tilePosition = BoardPositionHelper.WorldToBoardPosition(this.transform.position);
-            Modal = GameLoop.Instance.Board.TileAt(tilePosition);
         }
 
         public void OnPointerClick(PointerEventData eventData)

@@ -7,7 +7,7 @@ using UnityEngine.Video;
 
 namespace BoardSystem
 {
-    public class PiecePlacedEventArgs<TPiece> : EventArgs where TPiece : class, IPiece
+    public class PiecePlacedEventArgs<TPiece> : EventArgs where TPiece : class, IPiece<TPiece>
     {
         public TPiece Piece { get;  }
 
@@ -17,7 +17,7 @@ namespace BoardSystem
         }
     }
 
-    public class Board<TPiece> where TPiece : class, IPiece
+    public class Board<TPiece> where TPiece : class, IPiece<TPiece>
     {
         public event EventHandler<PiecePlacedEventArgs<TPiece>> PiecePlaced;
 
@@ -91,7 +91,7 @@ namespace BoardSystem
 
             var piece = _values[idx];
 
-            piece.Captured();
+            piece.Captured(this);
 
             _values.RemoveAt(idx);
             _keys.RemoveAt(idx);
@@ -113,7 +113,7 @@ namespace BoardSystem
 
             var piece = _values[idx];
 
-            piece.Moved(fromTile, toTile);
+            piece.Moved(this, fromTile, toTile);
         }
 
         public void Place(Tile toTile, TPiece piece)
