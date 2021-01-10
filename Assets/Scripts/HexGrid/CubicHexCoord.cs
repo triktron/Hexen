@@ -163,9 +163,7 @@ namespace HexGrid
 		/// Get a hash reflecting the contents of the CubicHexCoord.
 		/// </summary>
 		/// <returns>An integer hash code reflecting the contents of the CubicHexCoord.</returns>
-		public override
-		int
-		GetHashCode()
+		public override int GetHashCode()
 		{
 			// See http://stackoverflow.com/questions/7813687/right-way-to-implement-gethashcode-for-this-struct
 			unchecked
@@ -183,9 +181,7 @@ namespace HexGrid
 		/// Check if this CubicHexCoord is equal to an arbitrary object.
 		/// </summary>
 		/// <returns>Whether or not this CubicHexCoord and the given object are equal.</returns>
-		public override
-		bool
-		Equals(object obj)
+		public override bool Equals(object obj)
 		{
 			if (obj == null)
 			{
@@ -215,9 +211,7 @@ namespace HexGrid
 		/// CubicHexCoords will be returned for.</param>
 		/// <returns>An array of CubicHexCoords within the given range from this hex (including 
 		/// this hex) in no particular order.</returns>
-		public
-		CubicHexCoord[]
-		AreaAround(int range)
+		public CubicHexCoord[] AreaAround(int range)
 		{
 			return CubicHexCoord.Area(this, range);
 		}
@@ -230,9 +224,7 @@ namespace HexGrid
 		/// <param name="direction">The diagonal direction of the requested neighbor.</param>
 		/// <returns>A CubicHexCoord representing the diagonal of this hex in the given diagonal 
 		/// direction.</returns>
-		public
-		CubicHexCoord
-		Diagonal(DiagonalEnum direction)
+		public CubicHexCoord Diagonal(DiagonalEnum direction)
 		{
 			return this + DIAGONALS[(int)direction];
 		}
@@ -244,9 +236,7 @@ namespace HexGrid
 		/// </summary>
 		/// <returns>An array of CubicHexCoords representing this hex's diagonals (in clockwise
 		/// order).</returns>
-		public
-		CubicHexCoord[]
-		Diagonals()
+		public CubicHexCoord[] Diagonals()
 		{
 			return new CubicHexCoord[6] {
 				this + DIAGONALS[ (int)DiagonalEnum.ESE ],
@@ -264,9 +254,7 @@ namespace HexGrid
 		/// </summary>
 		/// <param name="other">Any CubicHexCoord.</param>
 		/// <returns>An integer number of grid steps from this hex to the given hex.</returns>
-		public
-		int
-		DistanceTo(CubicHexCoord other)
+		public int DistanceTo(CubicHexCoord other)
 		{
 			return CubicHexCoord.Distance(this, other);
 		}
@@ -280,9 +268,7 @@ namespace HexGrid
 		/// </summary>
 		/// <param name="other">The CubicHexCoord representing the last hex in the line.</param>
 		/// <returns>An array of CubicHexCoords ordered as a line from start to end.</returns>
-		public
-		CubicHexCoord[]
-		LineTo(CubicHexCoord other)
+		public CubicHexCoord[] LineTo(CubicHexCoord other)
 		{
 			return CubicHexCoord.Line(this, other);
 		}
@@ -294,9 +280,7 @@ namespace HexGrid
 		/// <param name="direction">The direction of the requested neighbor.</param>
 		/// <returns>A CubicHexCoord representing the neighbor of this hex in the given direction.
 		/// </returns>
-		public
-		CubicHexCoord
-		Neighbor(DirectionEnum direction)
+		public CubicHexCoord Neighbor(DirectionEnum direction)
 		{
 			return this + DIRECTIONS[(int)direction];
 		}
@@ -308,9 +292,7 @@ namespace HexGrid
 		/// </summary>
 		/// <returns>An array of CubicHexCoords representing this hex's neighbors (in clockwise
 		/// order).</returns>
-		public
-		CubicHexCoord[]
-		Neighbors()
+		public CubicHexCoord[] Neighbors()
 		{
 			return new CubicHexCoord[6] {
 				this + DIRECTIONS[ (int)DirectionEnum.E  ],
@@ -333,9 +315,7 @@ namespace HexGrid
 		/// <param name="startDirection">The direction in which the first CubicHexCoord of the 
 		/// ring will appear in.</param>
 		/// <returns>An array of CubicHexCoords ordered as a ring.</returns>
-		public
-		CubicHexCoord[]
-		RingAround(int range, DirectionEnum startDirection = DirectionEnum.E)
+		public CubicHexCoord[] RingAround(int range, DirectionEnum startDirection = DirectionEnum.E)
 		{
 			return CubicHexCoord.Ring(this, range, startDirection);
 		}
@@ -352,9 +332,7 @@ namespace HexGrid
 		/// 60 degree rotation steps.</param>
 		/// <returns>A CubicHexCoord representing the position of the rotated hex on the grid.
 		/// </returns>
-		public
-		CubicHexCoord
-		RotateAroundOther(CubicHexCoord center, RotationEnum rotation)
+		public CubicHexCoord RotateAroundOther(CubicHexCoord center, RotationEnum rotation)
 		{
 			return CubicHexCoord.Rotate(center, this, rotation);
 		}
@@ -371,9 +349,7 @@ namespace HexGrid
 		/// 60 degree rotation steps.</param>
 		/// <returns>A CubicHexCoord representing the position of the rotated hex on the grid.
 		/// </returns>
-		public
-		CubicHexCoord
-		RotateOtherAround(CubicHexCoord toRotate, RotationEnum rotation)
+		public CubicHexCoord RotateOtherAround(CubicHexCoord toRotate, RotationEnum rotation)
 		{
 			return CubicHexCoord.Rotate(this, toRotate, rotation);
 		}
@@ -385,9 +361,7 @@ namespace HexGrid
 		/// </summary>
 		/// <param name="factor">A multiplicative factor to scale by.</param>
 		/// <returns>A new scaled CubicHexCoord.</returns>
-		public
-		CubicHexCoord
-		Scale(float factor)
+		public CubicHexCoord Scale(float factor)
 		{
 			return new FloatCubic(this).Scale(factor).Round();
 		}
@@ -405,9 +379,7 @@ namespace HexGrid
 		/// spiral will appear in.</param>
 		/// <returns>An array of CubicHexCoords ordered as a spiral, beginning from the center
 		/// and proceeding clockwise until it reaches the outside of the spiral.</returns>
-		public
-		CubicHexCoord[]
-		SpiralAroundInward(int range, DirectionEnum startDirection = DirectionEnum.E)
+		public CubicHexCoord[] SpiralAroundInward(int range, DirectionEnum startDirection = DirectionEnum.E)
 		{
 			return CubicHexCoord.SpiralInward(this, range, startDirection);
 		}
@@ -426,9 +398,7 @@ namespace HexGrid
 		/// <returns>An array of CubicHexCoords ordered as a spiral, beginning from the outside
 		/// and proceeding clockwise until it reaches the center of the spiral.</returns>
 		/// <returns></returns>
-		public
-		CubicHexCoord[]
-		SpiralAroundOutward(int range, DirectionEnum startDirection = DirectionEnum.E)
+		public CubicHexCoord[] SpiralAroundOutward(int range, DirectionEnum startDirection = DirectionEnum.E)
 		{
 			return CubicHexCoord.SpiralOutward(this, range, startDirection);
 		}
@@ -447,9 +417,7 @@ namespace HexGrid
 		/// CubicHexCoords will be returned for.</param>
 		/// <returns>An array of CubicHexCoords within the given range from the given center 
 		/// (including the center itself) in no particular order.</returns>
-		public static
-		CubicHexCoord[]
-		Area(CubicHexCoord center, int range)
+		public static CubicHexCoord[] Area(CubicHexCoord center, int range)
 		{
 			if (range < 0)
 			{
@@ -492,9 +460,7 @@ namespace HexGrid
 		/// <param name="direction">The diagonal direction to return a diff for.</param>
 		/// <returns>A CubicHexCoord representing the diff between some hex and its diagonal in 
 		/// the given diagonal direction.</returns>
-		public static
-		CubicHexCoord
-		DiagonalDiff(DiagonalEnum direction)
+		public static CubicHexCoord DiagonalDiff(DiagonalEnum direction)
 		{
 			return DIAGONALS[(int)direction];
 		}
@@ -507,9 +473,7 @@ namespace HexGrid
 		/// <param name="direction">The direction to return a diff for.</param>
 		/// <returns>A CubicHexCoord representing the diff between some hex and its neighbor in 
 		/// the given direction.</returns>
-		public static
-		CubicHexCoord
-		DirectionDiff(DirectionEnum direction)
+		public static CubicHexCoord DirectionDiff(DirectionEnum direction)
 		{
 			return DIRECTIONS[(int)direction];
 		}
@@ -526,9 +490,7 @@ namespace HexGrid
 		/// </param>
 		/// <returns>An array of CubicHexCoords that represents the hexes belonging to both a 
 		/// and b.</returns>
-		public static
-		CubicHexCoord[]
-		IntersectRanges(CubicHexCoord[] a, CubicHexCoord[] b)
+		public static CubicHexCoord[] IntersectRanges(CubicHexCoord[] a, CubicHexCoord[] b)
 		{
 			throw new NotImplementedException("Feature not suppored yet!");
 		}
@@ -540,9 +502,7 @@ namespace HexGrid
 		/// <param name="a">Any CubicHexCoord.</param>
 		/// <param name="b">Any CubicHexCoord.</param>
 		/// <returns>An integer number of grid steps from a to b.</returns>
-		public static
-		int
-		Distance(CubicHexCoord a, CubicHexCoord b)
+		public static int Distance(CubicHexCoord a, CubicHexCoord b)
 		{
 			int dx = Math.Abs(a.x - b.x);
 			int dy = Math.Abs(a.y - b.y);
@@ -561,9 +521,7 @@ namespace HexGrid
 		/// <param name="start">The CubicHexCoord representing the first hex in the line.</param>
 		/// <param name="end">The CubicHexCoord representing the last hex in the line.</param>
 		/// <returns>An array of CubicHexCoords ordered as a line from start to end.</returns>
-		public static
-		CubicHexCoord[]
-		Line(CubicHexCoord start, CubicHexCoord end)
+		public static CubicHexCoord[] Line(CubicHexCoord start, CubicHexCoord end)
 		{
 			int distance = CubicHexCoord.Distance(start, end);
 
@@ -593,9 +551,7 @@ namespace HexGrid
 		/// <param name="startDirection">The direction in which the first CubicHexCoord of the 
 		/// ring will appear in.</param>
 		/// <returns>An array of CubicHexCoords ordered as a ring.</returns>
-		public static
-		CubicHexCoord[]
-		Ring(CubicHexCoord center, int range, DirectionEnum startDirection = DirectionEnum.E)
+		public static CubicHexCoord[] Ring(CubicHexCoord center, int range, DirectionEnum startDirection = DirectionEnum.E)
 		{
 			if (range <= 0)
 			{
@@ -640,9 +596,7 @@ namespace HexGrid
 		/// 60 degree rotation steps.</param>
 		/// <returns>A CubicHexCoord representing the position of the rotated hex on the grid.
 		/// </returns>
-		public static
-		CubicHexCoord
-		Rotate(CubicHexCoord center, CubicHexCoord toRotate, RotationEnum rotation)
+		public static CubicHexCoord Rotate(CubicHexCoord center, CubicHexCoord toRotate, RotationEnum rotation)
 		{
 			throw new NotImplementedException("Feature not suppored yet!");
 		}
@@ -661,9 +615,7 @@ namespace HexGrid
 		/// spiral will appear in.</param>
 		/// <returns>An array of CubicHexCoords ordered as a spiral, beginning from the center
 		/// and proceeding clockwise until it reaches the outside of the spiral.</returns>
-		public static
-		CubicHexCoord[]
-		SpiralInward(CubicHexCoord center, int range, DirectionEnum startDirection = DirectionEnum.E)
+		public static CubicHexCoord[] SpiralInward(CubicHexCoord center, int range, DirectionEnum startDirection = DirectionEnum.E)
 		{
 			if (range <= 0)
 			{
@@ -709,9 +661,7 @@ namespace HexGrid
 		/// spiral will appear in.</param>
 		/// <returns>An array of CubicHexCoords ordered as a spiral, beginning from the outside
 		/// and proceeding clockwise until it reaches the center of the spiral.</returns>
-		public static
-		CubicHexCoord[]
-		SpiralOutward(CubicHexCoord center, int range, DirectionEnum startDirection = DirectionEnum.E)
+		public static CubicHexCoord[] SpiralOutward(CubicHexCoord center, int range, DirectionEnum startDirection = DirectionEnum.E)
 		{
 			if (range <= 0)
 			{

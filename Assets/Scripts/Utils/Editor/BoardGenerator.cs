@@ -50,25 +50,27 @@ public class BoardGenerator : EditorWindow
         foreach (var position in positions)
         {
             var hex = PrefabUtility.InstantiatePrefab(_hexPrefab) as GameObject;
-            var pos = position.hex_to_pixel();
+            var pos = position.ToAxial().ToPixel();
             hex.transform.position = new Vector3(pos.x, 0, pos.y);
-            hex.name = $"Hex {position.r} {position.q}";
+            hex.name = $"Hex (X:{position.x} Y:{position.y} Z:{position.z})";
         }
     }
 
-    private List<AxialHexCoord> GetPositions(int size)
+    private List<CubicHexCoord> GetPositions(int size)
     {
         // generate axial cordinates
-        var options = new List<AxialHexCoord>();
+        var options = new List<CubicHexCoord>();
 
-        for (int x = -size+1; x < size; x++)
+        for (int q = -size; q <= size; q++)
         {
-            for (int y = -size + 1; y < size; y++)
+            int r1 = Mathf.Max(-size, -q - size);
+            int r2 = Mathf.Min(size, -q + size);
+            for (int r = r1; r <= r2; r++)
             {
-                var option = new AxialHexCoord(x, y);
-                if (Mathf.Abs(x + y) < size && !options.Contains(option)) options.Add(option);
+                options.Add(new CubicHexCoord(q, r, -q - r));
             }
         }
+
 
         return options;
     }

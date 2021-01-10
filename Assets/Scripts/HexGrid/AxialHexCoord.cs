@@ -57,14 +57,22 @@ namespace HexGrid
 			return new CubicHexCoord(x, y, z);
 		}
 
-		public Vector2 hex_to_pixel()
+		public Vector2 ToPixel()
         {
 			var x = (float)Math.Sqrt(3) * q + (float)Math.Sqrt(3) / 2 * r;
 
 			var y = 3f/ 2f * r;
 
 			return new Vector2(x,y);
+		}
 
+		static AxialHexCoord FromPixel(Vector2Int point)
+        {
+			var q = Mathf.Sqrt(3) / 3f * point.x - 1f/ 3f * point.y;
+
+			var r = 2f/ 3f * point.y;
+
+			return new AxialHexCoord(Mathf.RoundToInt(q), Mathf.RoundToInt(r));
 		}
 
 		#endregion
