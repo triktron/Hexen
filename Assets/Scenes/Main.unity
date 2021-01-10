@@ -533,7 +533,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6743607272640164874, guid: eb7bcffe8c52d3748994302185aec3f9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb7bcffe8c52d3748994302185aec3f9, type: 3}
@@ -1726,6 +1726,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Queen Dark
       objectReference: {fileID: 0}
+    - target: {fileID: 1585328863111942089, guid: 3fe3f40f13fdec24cadc4d70d1fd3952, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3fe3f40f13fdec24cadc4d70d1fd3952, type: 3}
 --- !u!1001 &533710171
@@ -1906,6 +1910,10 @@ PrefabInstance:
     - target: {fileID: 6743607272640164874, guid: eb7bcffe8c52d3748994302185aec3f9, type: 3}
       propertyPath: m_Name
       value: Bishop Dark
+      objectReference: {fileID: 0}
+    - target: {fileID: 6743607272640164874, guid: eb7bcffe8c52d3748994302185aec3f9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb7bcffe8c52d3748994302185aec3f9, type: 3}
@@ -2108,7 +2116,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 531222758220618065, guid: c191f0c4b478f1747b288b109a7d588e, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5977192854094942280, guid: c191f0c4b478f1747b288b109a7d588e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2381,6 +2389,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rook Dark
       objectReference: {fileID: 0}
+    - target: {fileID: 341318845248746162, guid: e11b6bead9a14ce499cf7e8eca17cd18, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3790667898923080884, guid: e11b6bead9a14ce499cf7e8eca17cd18, type: 3}
       propertyPath: m_LocalPosition.x
       value: 7
@@ -2437,6 +2449,10 @@ PrefabInstance:
     - target: {fileID: 5835000586784118427, guid: b799e2dccdef685479866ac26ef79f99, type: 3}
       propertyPath: m_Name
       value: King Dark
+      objectReference: {fileID: 0}
+    - target: {fileID: 5835000586784118427, guid: b799e2dccdef685479866ac26ef79f99, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7542118113802648608, guid: b799e2dccdef685479866ac26ef79f99, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2928,7 +2944,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 341318845248746162, guid: e11b6bead9a14ce499cf7e8eca17cd18, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3790667898923080884, guid: e11b6bead9a14ce499cf7e8eca17cd18, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3750,6 +3766,10 @@ PrefabInstance:
     - target: {fileID: 531222758220618065, guid: c191f0c4b478f1747b288b109a7d588e, type: 3}
       propertyPath: m_Name
       value: Knight Dark
+      objectReference: {fileID: 0}
+    - target: {fileID: 531222758220618065, guid: c191f0c4b478f1747b288b109a7d588e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5977192854094942280, guid: c191f0c4b478f1747b288b109a7d588e, type: 3}
       propertyPath: m_LocalPosition.x

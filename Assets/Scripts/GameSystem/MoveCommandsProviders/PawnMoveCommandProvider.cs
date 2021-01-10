@@ -14,7 +14,7 @@ namespace GameSystem.MoveCommandsProviders
     {
         public static readonly string Name = "Pawn";
 
-        public PawnMoveCommandProvider(PlayGameState playGameState, ReplayManager replayManager) : base(playGameState, new PawnAreaMoveCommand(replayManager), new PawnBasicMoveCommand(replayManager), new PawnFirstMoveCommand(replayManager))
+        public PawnMoveCommandProvider(PlayGameState playGameState, ReplayManager replayManager) : base(playGameState, new PawnPathFindingMove(replayManager), new PawnAreaMoveCommand(replayManager), new PawnBasicMoveCommand(replayManager), new PawnFirstMoveCommand(replayManager))
         {
         }
     }
