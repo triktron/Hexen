@@ -16,9 +16,6 @@ namespace Editors
             var playerIDSp = serializedObject.FindProperty("_playerID");
             EditorGUILayout.PropertyField(playerIDSp);
 
-            var facingBackSp = serializedObject.FindProperty("_facingBack");
-            EditorGUILayout.PropertyField(facingBackSp);
-
             var movementNameSp = serializedObject.FindProperty("_movementName");
             var movementName = movementNameSp.stringValue;
 

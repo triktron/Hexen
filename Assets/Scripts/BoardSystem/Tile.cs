@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HexGrid;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,7 @@ namespace BoardSystem
     {
         public event EventHandler HightlightStatusChanged;
 
-        public Position2 Position { get; }
+        public CubicHexCoord Position { get; }
         public bool Highlight { get => _highlight; 
             internal set {
                 _highlight = value;
@@ -18,9 +19,9 @@ namespace BoardSystem
         }
         private bool _highlight;
 
-        public Tile(int x, int y)
+        public Tile(int x, int y, int z)
         {
-            Position = new Position2 { X = x, Y = y };
+            Position = new CubicHexCoord(x,y,z);
         }
 
         protected virtual void OnHighlightStatusChanged(EventArgs args)

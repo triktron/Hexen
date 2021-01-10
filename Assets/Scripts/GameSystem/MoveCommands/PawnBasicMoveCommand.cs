@@ -1,6 +1,8 @@
 ﻿using BoardSystem;
 using GameSystem.Modals;
 using GameSystem.MoveProvider;
+using HexGrid;
+using HexGrid.Enum;
 using MoveSystem;
 using ReplaySystem;
 using System.Collections;
@@ -18,10 +20,9 @@ namespace GameSystem.MoveCommands
         public override List<Tile> Tiles(Board<ChessPiece> board, ChessPiece _piece)
         {
             var validTiles = new MovementHelper(board, _piece)
-                .North(1, MovementHelper.IsEmpty)
-                //.North(2, MovementHelper.IsEmpty, (_board, piece, tile) => !piece.HasMoved)
-                .NorthEast(1, MovementHelper.CanCapture)
-                .NorthWest(1, MovementHelper.CanCapture)
+                .Neigbours()
+                //.Collect(new CubicHexCoord(1,0,0), 2, MovementHelper.IsEmpty)
+                //.Collect(new CubicHexCoord(-1,0,0), 2, MovementHelper.IsEmpty)
                 .Generate();
 
             return validTiles;

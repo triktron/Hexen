@@ -1,5 +1,7 @@
 ﻿using BoardSystem;
 using GameSystem.Modals;
+using HexGrid;
+using HexGrid.Enum;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,33 +23,15 @@ namespace GameSystem.MoveProvider
             _piece = piece;
         }
 
-        public MovementHelper Collect(int xOffset, int yOffset, int step = int.MaxValue, params Validator[] validators)
+        public MovementHelper Collect(CubicHexCoord offset, int step = int.MaxValue, params Validator[] validators)
         {
-            // rotate offset if needed
-            if (_piece.FacingBack) yOffset *= -1;
-
             Tile lastTile = _board.TileOf(_piece);
             for (int count = 1; count <= step; count++)
             {
                 Tile tile = lastTile;
-                // move forward or backwards
-                if (xOffset != 0)
-                    for (int x = 0; x < Mathf.Abs(xOffset); x++)
-                    {
-                        if (tile == null) break;
 
-                        tile = _board.TileAt(tile.Position + new Position2 { X = (int)Mathf.Sign(xOffset) });
-                    }
-
-                // move left or right
-                if (yOffset != 0)
-                    for (int y = 0; y < Mathf.Abs(yOffset); y++)
-                    {
-                        if (tile == null) break;
-
-                        tile = _board.TileAt(tile.Position + new Position2 { Y = (int)Mathf.Sign(yOffset) });
-                    }
-
+                var pos = tile.Position - offset;
+                tile = _board.TileAt(pos);
 
                 if (tile == null) break;
                 lastTile = tile;
@@ -69,44 +53,23 @@ namespace GameSystem.MoveProvider
             return _validTile;
         }
 
-        public MovementHelper North(int step = int.MaxValue, params Validator[] validators)
+        public MovementHelper Neigbours(params Validator[] validators)
         {
-            return Collect(0, 1, step, validators);
-        }
+            CubicHexCoord[] DIRECTIONS = {
+            new CubicHexCoord(  1, -1,  0 ),
+            new CubicHexCoord(  0, -1,  1 ),
+            new CubicHexCoord( -1,  0,  1 ),
+            new CubicHexCoord( -1,  1,  0 ),
+            new CubicHexCoord(  0,  1, -1 ),
+            new CubicHexCoord(  1,  0, -1 )
+            };
 
-        public MovementHelper NorthEast(int step = int.MaxValue, params Validator[] validators)
-        {
-            return Collect(1, 1, step, validators);
-        }
+            for (int i = 0; i < DIRECTIONS.Length; i++)
+            {
+                Collect(DIRECTIONS[i], 1, validators);
+            }
 
-        public MovementHelper East(int step = int.MaxValue, params Validator[] validators)
-        {
-            return Collect(1, 0, step, validators);
-        }
-
-        public MovementHelper EastSouth(int step = int.MaxValue, params Validator[] validators)
-        {
-            return Collect(1, -1, step, validators);
-        }
-
-        public MovementHelper South(int step = int.MaxValue, params Validator[] validators)
-        {
-            return Collect(0, -1, step, validators);
-        }
-
-        public MovementHelper SouthWest(int step = int.MaxValue, params Validator[] validators)
-        {
-            return Collect(-1, -1, step, validators);
-        }
-
-        public MovementHelper West(int step = int.MaxValue, params Validator[] validators)
-        {
-            return Collect(-1, 0, step, validators);
-        }
-
-        public MovementHelper NorthWest(int step = int.MaxValue, params Validator[] validators)
-        {
-            return Collect(-1, 1, step, validators);
+            return this;
         }
 
         public static bool CanCapture(Board<ChessPiece> board, ChessPiece piece, Tile tile)

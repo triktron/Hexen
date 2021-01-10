@@ -29,15 +29,12 @@ namespace GameSystem.Modals
 
         public bool HasMoved;
 
-        public int PlayerID { get; }
-        public bool FacingBack { get; }
-
         public string MovementName  { get; internal set; }
 
-        public ChessPiece(int playerID, bool facingBack, string name)
+        public int PlayerID { get; }
+        public ChessPiece(int playerID, string name)
         {
             PlayerID = playerID;
-            FacingBack = facingBack;
             MovementName = name;
         }
 

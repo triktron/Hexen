@@ -125,6 +125,11 @@ namespace HexGrid
 			);
 		}
 
+		public override string ToString()
+		{
+			return $"{x}/{y}/{z}";
+		}
+
 		#endregion
 	}
 }

@@ -7,14 +7,16 @@ using BoardSystem;
 using GameSystem.MoveCommands;
 using ReplaySystem;
 using GameSystem.States;
+using Utils;
 
 namespace GameSystem.MoveCommandsProviders
 {
+    [MoveCommandProvider(Name)]
     public class PawnMoveCommandProvider : AbstractMoveCommandProvider
     {
-        public static readonly string Name = "Pawn";
+        public const string Name = "Pawn";
 
-        public PawnMoveCommandProvider(PlayGameState playGameState, ReplayManager replayManager) : base(playGameState, new PawnPathFindingMove(replayManager), new PawnAreaMoveCommand(replayManager), new PawnBasicMoveCommand(replayManager), new PawnFirstMoveCommand(replayManager))
+        public PawnMoveCommandProvider(PlayGameState playGameState, ReplayManager replayManager) : base(playGameState, new PawnBasicMoveCommand(replayManager))
         {
         }
     }

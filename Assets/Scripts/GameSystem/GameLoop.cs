@@ -17,7 +17,7 @@ namespace GameSystem
 {
     public class GameLoop : MonoBehaviourSingleton<GameLoop>
     {
-        public Board<ChessPiece> Board { get; } = new Board<ChessPiece>(8, 8);
+        public Board<ChessPiece> Board { get; } = new Board<ChessPiece>(3);
 
         StateMachine<GameStateBase> _stateMachine;
 
@@ -31,7 +31,7 @@ namespace GameSystem
                 var boardPosition = BoardPositionHelper.WorldToBoardPosition(worldPosition);
                 var tile = Board.TileAt(boardPosition);
 
-                var piece = new ChessPiece(pieceView.PlayerID, pieceView.FacingBack, pieceView.MovementName);
+                var piece = new ChessPiece(pieceView.PlayerID, pieceView.MovementName);
                 Board.Place(tile, piece);
                 moveManager.Register(piece, pieceView.MovementName);
                 pieceView.Modal = piece;
@@ -51,11 +51,6 @@ namespace GameSystem
             _stateMachine.MoveTo(GameStates.Play);
 
             moveManager.Register(PawnMoveCommandProvider.Name, new PawnMoveCommandProvider(playGameState, replayManager));
-            moveManager.Register(KnightMoveCommandProvider.Name, new KnightMoveCommandProvider(playGameState, replayManager));
-            moveManager.Register(BishopMoveCommandProvider.Name, new BishopMoveCommandProvider(playGameState, replayManager));
-            moveManager.Register(RookMoveCommandProvider.Name, new RookMoveCommandProvider(playGameState, replayManager));
-            moveManager.Register(KingMoveCommandProvider.Name, new KingMoveCommandProvider(playGameState, replayManager));
-            moveManager.Register(QueenMoveCommandProvider.Name, new QueenMoveCommandProvider(playGameState, replayManager));
 
             ConnectMoveCommandProviderView(moveManager);
             ConnectChessPieceViews(moveManager);

@@ -176,12 +176,17 @@ namespace HexGrid
 			}
 		}
 
+        public override string ToString()
+        {
+			return $"{x}/{y}/{z}";
+        }
 
-		/// <summary>
-		/// Check if this CubicHexCoord is equal to an arbitrary object.
-		/// </summary>
-		/// <returns>Whether or not this CubicHexCoord and the given object are equal.</returns>
-		public override bool Equals(object obj)
+
+        /// <summary>
+        /// Check if this CubicHexCoord is equal to an arbitrary object.
+        /// </summary>
+        /// <returns>Whether or not this CubicHexCoord and the given object are equal.</returns>
+        public override bool Equals(object obj)
 		{
 			if (obj == null)
 			{
@@ -693,6 +698,6 @@ namespace HexGrid
 			return result;
 		}
 
-		#endregion
-	}
+        #endregion
+    }
 }

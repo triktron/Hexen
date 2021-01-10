@@ -1,3 +1,15 @@
-﻿{
-	"name": "BoardSystem"
+{
+    "name": "BoardSystem",
+    "references": [
+        "GUID:5340ed3268621f94ca5d980b2a596d78"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

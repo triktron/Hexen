@@ -13,14 +13,10 @@ namespace GameSystem.Views
         [SerializeField]
         private int _playerID = 0;
 
-        [SerializeField]
-        private string _movementName = null;
-
         public int PlayerID => _playerID;
 
         [SerializeField]
-        private bool _facingBack = false;
-        public bool FacingBack => _facingBack;
+        private string _movementName = null;
 
         private ChessPiece _modal;
         public ChessPiece Modal

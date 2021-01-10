@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HexGrid;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,13 +22,12 @@ namespace BoardSystem
     {
         public event EventHandler<PiecePlacedEventArgs<TPiece>> PiecePlaced;
 
-        private Dictionary<Position2, Tile> _tiles = new Dictionary<Position2, Tile>();
+        private Dictionary<CubicHexCoord, Tile> _tiles = new Dictionary<CubicHexCoord, Tile>();
 
         private List<Tile> _keys = new List<Tile>();
         private List<TPiece> _values = new List<TPiece>();
 
-        public readonly int Rows;
-        public readonly int Columns;
+        public readonly int Size;
 
         public List<Tile> Tiles => _tiles.Values.ToList();
 
@@ -39,10 +39,9 @@ namespace BoardSystem
             }
         }
 
-        public Board(int rows, int columns)
+        public Board(int size)
         {
-            Rows = rows;
-            Columns = columns;
+            Size = size;
 
             InitTiles();
         }
@@ -52,11 +51,12 @@ namespace BoardSystem
             foreach (var tile in tiles)
             {
                 tile.Highlight = true;
+                Debug.Log($"Hightlighting {tile.Position.x} {tile.Position.y} {tile.Position.z}");
             }
         }
 
         
-        public Tile TileAt(Position2 position)
+        public Tile TileAt(CubicHexCoord position)
         {
             if (_tiles.TryGetValue(position, out var tile))
                 return tile;
@@ -132,11 +132,13 @@ namespace BoardSystem
 
         private void InitTiles()
         {
-            for (int y = 0; y < Rows; y++)
+            for (int q = -Size; q <= Size; q++)
             {
-                for (int x = 0; x < Columns; x++)
+                int r1 = Mathf.Max(-Size, -q - Size);
+                int r2 = Mathf.Min(Size, -q + Size);
+                for (int r = r1; r <= r2; r++)
                 {
-                    _tiles.Add(new Position2 { X = x, Y = y }, new Tile(x, y));
+                    _tiles.Add(new CubicHexCoord(q, r, -q - r), new Tile(q, r, -q - r));
                 }
             }
         }

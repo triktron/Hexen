@@ -66,13 +66,13 @@ namespace HexGrid
 			return new Vector2(x,y);
 		}
 
-		static AxialHexCoord FromPixel(Vector2Int point)
+		public static CubicHexCoord FromPixel(Vector2 point)
         {
-			var q = Mathf.Sqrt(3) / 3f * point.x - 1f/ 3f * point.y;
+			var r = (float)Mathf.Sqrt(3) / 3f * point.x - 1f/ 3f * point.y;
 
-			var r = 2f/ 3f * point.y;
+			var q = 2f/ 3f * point.y;
 
-			return new AxialHexCoord(Mathf.RoundToInt(q), Mathf.RoundToInt(r));
+			return new FloatAxial(r, q).ToFloatCubic().Round();
 		}
 
 		#endregion

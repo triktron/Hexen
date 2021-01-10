@@ -39,6 +39,7 @@ namespace GameSystem.Views
         {
             _meshRenderer = GetComponent<MeshRenderer>();
             _origianlMaterial = _meshRenderer.sharedMaterial;
+            var cb = BoardPositionHelper.WorldToBoardPosition(transform.position);
         }
 
         public void OnPointerClick(PointerEventData eventData)

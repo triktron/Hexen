@@ -74,10 +74,6 @@ namespace GameSystem.States
 
                 _selectedPiece = null;
                 _currentMoveComand = null;
-
-
-                _currentPlayerID++;
-                if (_currentPlayerID >= 2) _currentPlayerID = 0;
             }
         }
         override public void Select(IMoveCommand<ChessPiece> moveComand)
