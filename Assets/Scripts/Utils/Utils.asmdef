@@ -1,6 +1,8 @@
 {
     "name": "Utils",
-    "references": [],
+    "references": [
+        "GUID:5340ed3268621f94ca5d980b2a596d78"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

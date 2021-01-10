@@ -19,7 +19,7 @@ namespace GameSystem.MoveCommands
 
         public override List<Tile> Tiles(Board<ChessPiece> board, ChessPiece piece)
         {
-            var toPosition = new Position() { X = 7, Y = 7 };
+            var toPosition = new Position2() { X = 7, Y = 7 };
 
             var toTile = board.TileAt(toPosition);
             var fromTile = board.TileOf(piece);

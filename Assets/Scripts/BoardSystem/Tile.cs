@@ -9,7 +9,7 @@ namespace BoardSystem
     {
         public event EventHandler HightlightStatusChanged;
 
-        public Position Position { get; }
+        public Position2 Position { get; }
         public bool Highlight { get => _highlight; 
             internal set {
                 _highlight = value;
@@ -20,7 +20,7 @@ namespace BoardSystem
 
         public Tile(int x, int y)
         {
-            Position = new Position { X = x, Y = y };
+            Position = new Position2 { X = x, Y = y };
         }
 
         protected virtual void OnHighlightStatusChanged(EventArgs args)

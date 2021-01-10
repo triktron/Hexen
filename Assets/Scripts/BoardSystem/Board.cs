@@ -21,7 +21,7 @@ namespace BoardSystem
     {
         public event EventHandler<PiecePlacedEventArgs<TPiece>> PiecePlaced;
 
-        private Dictionary<Position, Tile> _tiles = new Dictionary<Position, Tile>();
+        private Dictionary<Position2, Tile> _tiles = new Dictionary<Position2, Tile>();
 
         private List<Tile> _keys = new List<Tile>();
         private List<TPiece> _values = new List<TPiece>();
@@ -56,7 +56,7 @@ namespace BoardSystem
         }
 
         
-        public Tile TileAt(Position position)
+        public Tile TileAt(Position2 position)
         {
             if (_tiles.TryGetValue(position, out var tile))
                 return tile;
@@ -136,7 +136,7 @@ namespace BoardSystem
             {
                 for (int x = 0; x < Columns; x++)
                 {
-                    _tiles.Add(new Position { X = x, Y = y }, new Tile(x, y));
+                    _tiles.Add(new Position2 { X = x, Y = y }, new Tile(x, y));
                 }
             }
         }

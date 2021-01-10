@@ -36,7 +36,7 @@ namespace GameSystem.MoveProvider
                     {
                         if (tile == null) break;
 
-                        tile = _board.TileAt(tile.Position + new Position { X = (int)Mathf.Sign(xOffset) });
+                        tile = _board.TileAt(tile.Position + new Position2 { X = (int)Mathf.Sign(xOffset) });
                     }
 
                 // move left or right
@@ -45,7 +45,7 @@ namespace GameSystem.MoveProvider
                     {
                         if (tile == null) break;
 
-                        tile = _board.TileAt(tile.Position + new Position { Y = (int)Mathf.Sign(yOffset) });
+                        tile = _board.TileAt(tile.Position + new Position2 { Y = (int)Mathf.Sign(yOffset) });
                     }
 
 
