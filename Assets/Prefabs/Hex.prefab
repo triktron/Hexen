@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6182655399887782991}
   - component: {fileID: 2477544211961713791}
   - component: {fileID: 761654368202315061}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Hex
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _highlightMaterial: {fileID: 2100000, guid: dee464f30ed7ab04498553998fd2378d, type: 2}
-  pos: {x: 0, y: 0, z: 0}
 --- !u!64 &761654368202315061
 MeshCollider:
   m_ObjectHideFlags: 0

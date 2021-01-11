@@ -52,10 +52,12 @@ namespace GameSystem.States
         {
             if (_playerPiece != null && _currentMoveComand != null)
             {
-                var tiles = _currentMoveComand.Tiles(_board, _playerPiece);
-                if (!tiles.Contains(tile)) return;
 
+                var tiles = _currentMoveComand.Tiles(_board, _playerPiece);
+                
                 _board.UnHightlight(tiles);
+
+                if (!tiles.Contains(tile)) return;
 
                 _currentMoveComand.Execute(_board, _playerPiece, tile);
 
