@@ -27,5 +27,12 @@ namespace GameSystem.MoveCommands
 
             return validTiles;
         }
+
+        public override List<Tile> Action(Board<Modals.Piece> board, Modals.Piece _piece, Tile tile)
+        {
+            var validTiles = new List<Tile>() { tile };
+
+            return validTiles;
+        }
     }
 }

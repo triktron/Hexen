@@ -17,10 +17,6 @@ namespace GameSystem.States
         {
         }
 
-        virtual public void Select(Modals.Piece piece)
-        {
-        }
-
         virtual public void Select(Tile tile)
         {
         }
@@ -33,6 +29,11 @@ namespace GameSystem.States
 
         virtual public void Backward()
         {
+        }
+
+        virtual public void Hover(Tile tile)
+        {
+
         }
     }
 }

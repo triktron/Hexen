@@ -43,11 +43,6 @@ namespace GameSystem.States
             _moveManager.MoveComandProviderChanged -= OnMoveComandManagerChanged;
         }
 
-        override public void Select(Modals.Piece piece)
-        {
-
-        }
-
         override public void Select(Tile tile)
         {
             if (_playerPiece != null && _currentMoveComand != null)
@@ -88,6 +83,24 @@ namespace GameSystem.States
         public override void Backward()
         {
             StateMachine.MoveTo(GameStates.Replay);
+        }
+
+        public override void Hover(Tile tile)
+        {
+            if (_currentMoveComand == null || _playerPiece == null) return;
+
+            var tiles = _currentMoveComand.Tiles(_board, _playerPiece);
+            var action = _currentMoveComand.Action(_board, _playerPiece, tile);
+
+            if (tile != null && tiles.Contains(tile))
+            {
+                _board.UnHightlight(tiles);
+                _board.Highlight(action);
+            } else
+            {
+                _board.UnHightlight(action);
+                _board.Highlight(tiles);
+            }
         }
     }
 }

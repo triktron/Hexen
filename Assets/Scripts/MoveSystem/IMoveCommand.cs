@@ -9,6 +9,7 @@ namespace MoveSystem
     {
         bool CanExecute(Board<TPiece> board, TPiece piece);
         List<Tile> Tiles(Board<TPiece> board, TPiece piece);
+        List<Tile> Action(Board<TPiece> board, TPiece piece, Tile tile);
 
         void Execute(Board<TPiece> board, TPiece piece, Tile toTile);
     }

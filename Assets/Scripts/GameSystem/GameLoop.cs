@@ -83,11 +83,6 @@ namespace GameSystem
             moveManager.MoveComandProviderChanged += (sender, args) => moveCommandProviderView.Modal = args.MoveCommandProvider;
         }
 
-        public void Select(Modals.Piece piece)
-        {
-            _stateMachine.CurrentSate.Select(piece);
-        }
-
         public void Select(Tile tile)
         {
             _stateMachine.CurrentSate.Select(tile);
@@ -95,6 +90,10 @@ namespace GameSystem
         public void Select(IMoveCommand<Modals.Piece> moveComand)
         {
             _stateMachine.CurrentSate.Select(moveComand);
+        }
+        public void Hover(Tile tile)
+        {
+            _stateMachine.CurrentSate.Hover(tile);
         }
         public void Forward()
         {

@@ -53,28 +53,29 @@ namespace GameSystem.Views
         {
             // Continue moving object around screen.
             transform.localPosition += new Vector3(eventData.delta.x, eventData.delta.y, 0) / transform.lossyScale.x; // Thanks to the canvas scaler we need to devide pointer delta by canvas scale to match pointer movement.
+
+            GameLoop.Instance.Hover(GetTileUnderMouse());
         }
         public void OnEndDrag(PointerEventData eventData)
         {
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hitInfo,100, _tileLayer))
-            {
-                Tile tile = null;
+            GameLoop.Instance.Select(GetTileUnderMouse());
 
-                var tileView = hitInfo.transform.GetComponent<TileView>();
-                if (tileView != null)
-                {
-                    tile = tileView.Modal;
-                }
-
-                GameLoop.Instance.Select(tile);
-            }
-            else
-            {
-                GameLoop.Instance.Select(null as Tile);
-            }
 
             transform.SetParent(_originalParent);
             transform.SetSiblingIndex(_originalSiblingIndex);
+        }
+
+        public Tile GetTileUnderMouse()
+        {
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hitInfo, 100, _tileLayer))
+            {
+                var tileView = hitInfo.transform.GetComponent<TileView>();
+                if (tileView == null) return null;
+                
+                return tileView.Modal;
+            }
+
+            return null;
         }
     }
 }

@@ -59,5 +59,6 @@ namespace GameSystem.MoveCommands
         }
 
         public abstract List<Tile> Tiles(Board<Modals.Piece> board, Modals.Piece piece);
+        public abstract List<Tile> Action(Board<Modals.Piece> board, Modals.Piece piece, Tile tile);
     }
 }

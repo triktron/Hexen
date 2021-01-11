@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace GameSystem.Views
 {
-    public class TileView : MonoBehaviour, IPointerClickHandler
+    public class TileView : MonoBehaviour
     {
         private Tile _modal;
         public Tile Modal 
@@ -42,11 +42,6 @@ namespace GameSystem.Views
             _meshRenderer = GetComponent<MeshRenderer>();
             _origianlMaterial = _meshRenderer.sharedMaterial;
             var cb = BoardPositionHelper.WorldToBoardPosition(transform.position);
-        }
-
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            GameLoop.Instance.Select(_modal);
         }
 
         private void OnDestroy()

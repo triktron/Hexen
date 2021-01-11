@@ -8,7 +8,7 @@ using BoardSystem;
 namespace GameSystem.Views
 {
     [SelectionBase]
-    public class PieceView : MonoBehaviour, IPointerClickHandler
+    public class PieceView : MonoBehaviour
     {
         public string MovementName => _movementName;
 
@@ -50,11 +50,6 @@ namespace GameSystem.Views
         private void ModalMoved(object sender, PieceMovedEventArgs e)
         {
             transform.position = BoardPositionHelper.BoardToWorldPosition(e.To.Position);
-        }
-
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            GameLoop.Instance.Select(Modal);
         }
 
         private void OnDestroy()

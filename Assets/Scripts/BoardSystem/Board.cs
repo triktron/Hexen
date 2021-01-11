@@ -35,7 +35,7 @@ namespace BoardSystem
         {
             foreach (var tile in tiles)
             {
-                tile.Highlight = false;
+                if (tile != null) tile.Highlight = false;
             }
         }
 
