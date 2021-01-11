@@ -132,14 +132,11 @@ namespace BoardSystem
 
         private void InitTiles()
         {
-            for (int q = -Size; q <= Size; q++)
+            var positions = BoardPositionHelper.GenerateBoard(Size);
+
+            foreach (var position in positions)
             {
-                int r1 = Mathf.Max(-Size, -q - Size);
-                int r2 = Mathf.Min(Size, -q + Size);
-                for (int r = r1; r <= r2; r++)
-                {
-                    _tiles.Add(new CubicHexCoord(q, r, -q - r), new Tile(q, r, -q - r));
-                }
+                _tiles.Add(position, new Tile(position.x, position.y, position.z));
             }
         }
 

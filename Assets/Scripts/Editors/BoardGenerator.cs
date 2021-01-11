@@ -3,23 +3,13 @@ using UnityEditor;
 using System;
 using System.Collections.Generic;
 using HexGrid;
+using BoardSystem;
 
 public class BoardGenerator : EditorWindow
 {
-    public struct Position3
-    {
-        public int X;
-        public int Y;
-        public int Z;
-    }
+    private GameObject _hexPrefab;
+    private int _size = 5;
 
-    public struct Position2
-    {
-        public int X;
-        public int Y;
-    }
-
-    // Add menu named "My Window" to the Window menu
     [MenuItem("Tools/Generate Hex Board")]
     static void Init()
     {
@@ -27,9 +17,6 @@ public class BoardGenerator : EditorWindow
         BoardGenerator window = (BoardGenerator)EditorWindow.GetWindow(typeof(BoardGenerator));
         window.Show();
     }
-
-    GameObject _hexPrefab;
-    int _size = 5;
 
     void OnGUI()
     {
@@ -45,7 +32,7 @@ public class BoardGenerator : EditorWindow
 
     private void GenerateGrid()
     {
-        var positions = GetPositions(_size);
+        var positions = BoardPositionHelper.GenerateBoard(_size);
 
         foreach (var position in positions)
         {
@@ -54,25 +41,6 @@ public class BoardGenerator : EditorWindow
             hex.transform.position = new Vector3(pos.x, 0, pos.y);
             hex.name = $"Hex (X:{position.x} Y:{position.y} Z:{position.z})";
         }
-    }
-
-    private List<CubicHexCoord> GetPositions(int size)
-    {
-        // generate axial cordinates
-        var options = new List<CubicHexCoord>();
-
-        for (int q = -size; q <= size; q++)
-        {
-            int r1 = Mathf.Max(-size, -q - size);
-            int r2 = Mathf.Min(size, -q + size);
-            for (int r = r1; r <= r2; r++)
-            {
-                options.Add(new CubicHexCoord(q, r, -q - r));
-            }
-        }
-
-
-        return options;
     }
 
     private void DeleteAllHex()

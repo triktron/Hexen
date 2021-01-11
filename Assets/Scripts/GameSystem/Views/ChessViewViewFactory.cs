@@ -10,21 +10,16 @@ namespace GameSystem.Views
     public class ChessViewViewFactory : ScriptableObject
     {
         [SerializeField]
-        private List<GameObject> _darkChessPieceViews = new List<GameObject>();
+        private List<GameObject> _players = new List<GameObject>();
 
-
-        [SerializeField]
-        private List<GameObject> _lightChessPieceViews = new List<GameObject>();
 
         [SerializeField]
         private List<string> _movementNames = new List<string>();
 
         public ChessPieceView CreateChessPieceView(Board<ChessPiece> board, ChessPiece modal)
         {
-            var list = modal.PlayerID == 0 ? _lightChessPieceViews : _darkChessPieceViews;
-
             var index = _movementNames.IndexOf(modal.MovementName);
-            var prefab = list[index];
+            var prefab = _players[index];
             var gameObject = Instantiate(prefab);
             var chessPieceView = gameObject.GetComponentInChildren<ChessPieceView>();
             var tile = board.TileOf(modal);

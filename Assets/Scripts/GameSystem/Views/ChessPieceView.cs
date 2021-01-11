@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using GameSystem.Modals;
 using System;
+using BoardSystem;
 
 namespace GameSystem.Views
 {
