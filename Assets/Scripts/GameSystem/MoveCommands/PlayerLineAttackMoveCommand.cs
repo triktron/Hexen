@@ -34,7 +34,7 @@ namespace GameSystem.MoveCommands
             var playerTile = board.TileOf(piece);
             var dir = playerTile.Position - tile.Position;
             dir = new CubicHexCoord(Mathf.Clamp(dir.x, -1, 1), Mathf.Clamp(dir.y, -1, 1), Mathf.Clamp(dir.z, -1, 1));
-
+            if (dir.Equals(new CubicHexCoord())) return new List<Tile>();
 
             var validTiles = new MovementHelper(board, piece)
                 .Collect(dir)
