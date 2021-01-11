@@ -92,13 +92,13 @@ namespace GameSystem.States
             var tiles = _currentMoveComand.Tiles(_board, _playerPiece);
             var action = _currentMoveComand.Action(_board, _playerPiece, tile);
 
+            _board.UnHightlight(_board.Tiles);
+
             if (tile != null && tiles.Contains(tile))
             {
-                _board.UnHightlight(tiles);
                 _board.Highlight(action);
             } else
             {
-                _board.UnHightlight(action);
                 _board.Highlight(tiles);
             }
         }
