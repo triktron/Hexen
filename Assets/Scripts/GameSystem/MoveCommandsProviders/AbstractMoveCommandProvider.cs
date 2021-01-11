@@ -25,7 +25,7 @@ namespace GameSystem.MoveCommandsProviders
 
         public List<IMoveCommand<Piece>> MoveCommands()
         {
-            var types = _commands.Where((command) => command.CanExecute(_playGameState.Board, _playGameState.PlayerPiece)).ToArray();
+            var types = _commands.ToArray();
 
             var commands = new List<IMoveCommand<Piece>>();
 

@@ -13,7 +13,7 @@ namespace GameSystem.MoveCommands
     public abstract class AbstractBasicMoveCommand : IMoveCommand<Modals.Piece>
     {
         protected ReplayManager ReplayManager;
-        internal string _name;
+        public string _name;
         internal Card _card;
 
         protected AbstractBasicMoveCommand(ReplayManager replayManager, string name)

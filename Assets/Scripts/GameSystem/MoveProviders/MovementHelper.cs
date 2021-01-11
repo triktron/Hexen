@@ -37,12 +37,15 @@ namespace GameSystem.MoveProvider
                 lastTile = tile;
 
                 var pawn = _board.PieceAt(tile);
-                if ((pawn == null || pawn.PlayerID != _piece.PlayerID) && validators.All(v => v(_board, _piece, tile)))
+                //if (pawn != null && pawn.PlayerID == _piece.PlayerID) continue;
+                var valid = validators.All(v => v(_board, _piece, tile));
+
+                if (pawn == null || valid)
                 {
                     _validTile.Add(tile);
                 }
 
-                if (pawn != null) break;
+                if (!valid) break;
             }
 
             return this;
@@ -53,7 +56,7 @@ namespace GameSystem.MoveProvider
             return _validTile;
         }
 
-        public MovementHelper Neigbours(params Validator[] validators)
+        public MovementHelper Neigbours(int maxDistance, params Validator[] validators)
         {
             CubicHexCoord[] DIRECTIONS = {
             new CubicHexCoord(  1, -1,  0 ),
@@ -66,7 +69,7 @@ namespace GameSystem.MoveProvider
 
             for (int i = 0; i < DIRECTIONS.Length; i++)
             {
-                Collect(DIRECTIONS[i], 1, validators);
+                Collect(DIRECTIONS[i], maxDistance, validators);
             }
 
             return this;

@@ -20,7 +20,7 @@ namespace GameSystem.MoveCommands
         public override List<Tile> Tiles(Board<Modals.Piece> board, Modals.Piece _piece)
         {
             var validTiles = new MovementHelper(board, _piece)
-                .Neigbours()
+                .Neigbours(1)
                 //.Collect(new CubicHexCoord(1,0,0), 2, MovementHelper.IsEmpty)
                 //.Collect(new CubicHexCoord(-1,0,0), 2, MovementHelper.IsEmpty)
                 .Generate();

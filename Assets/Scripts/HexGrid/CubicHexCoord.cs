@@ -606,6 +606,24 @@ namespace HexGrid
 			throw new NotImplementedException("Feature not suppored yet!");
 		}
 
+		public static CubicHexCoord RotateOnceLeft(CubicHexCoord center, CubicHexCoord toRotate)
+		{
+			var local = toRotate - center;
+			var localRotated = new CubicHexCoord(-local.z, -local.x, -local.y);
+			var rotated = localRotated + center;
+
+			return rotated;
+		}
+
+		public static CubicHexCoord RotateOnceRight(CubicHexCoord center, CubicHexCoord toRotate)
+		{
+			var local = toRotate - center;
+			var localRotated = new CubicHexCoord(-local.y, -local.z, -local.x);
+			var rotated = localRotated + center;
+
+			return rotated;
+		}
+
 
 		/// <summary>
 		/// Returns an array of CubicHexCoords of a area centering around the given center hex and 
