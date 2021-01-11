@@ -20,7 +20,7 @@ namespace GameSystem.MoveCommands
         public override List<Tile> Tiles(Board<Modals.Piece> board, Modals.Piece _piece)
         {
             var validTiles = new MovementHelper(board, _piece)
-                .Neigbours(int.MaxValue)
+                .All(MovementHelper.IsEmpty)
                 .Generate();
 
             return validTiles;

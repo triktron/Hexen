@@ -56,6 +56,18 @@ namespace GameSystem.MoveProvider
             return _validTile;
         }
 
+        public MovementHelper All(params Validator[] validators)
+        {
+            foreach (var tile in _board.Tiles)
+            {
+                var valid = validators.All(v => v(_board, _piece, tile));
+
+                if (valid) _validTile.Add(tile);
+            }
+
+            return this;
+        }
+
         public MovementHelper Neigbours(int maxDistance, params Validator[] validators)
         {
             CubicHexCoord[] DIRECTIONS = {
@@ -88,6 +100,11 @@ namespace GameSystem.MoveProvider
         public static bool IsEmpty(Board<Modals.Piece> board, Modals.Piece piece, Tile tile)
         {
             return board.PieceAt(tile) == null;
+        }
+
+        public static bool IsNotPlayer(Board<Modals.Piece> board, Modals.Piece piece, Tile tile)
+        {
+            return board.TileOf(piece).Position != tile.Position;
         }
     }
 
