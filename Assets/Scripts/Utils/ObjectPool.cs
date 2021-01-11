@@ -18,7 +18,7 @@ namespace GameSystem.Utils
 
         private void Awake()
         {
-            for (int count = 0; count < _amount; count++)
+            for (int count = _pooledObjects.Count; count < _amount; count++)
             {
                 var go = GameObject.Instantiate(_pooledObject, _parent);
                 go.SetActive(false);
@@ -37,7 +37,10 @@ namespace GameSystem.Utils
                 }
             }
 
-            return null;
+            var go = GameObject.Instantiate(_pooledObject, _parent);
+            _pooledObjects.Add(go);
+
+            return go;
         }
     }
 }

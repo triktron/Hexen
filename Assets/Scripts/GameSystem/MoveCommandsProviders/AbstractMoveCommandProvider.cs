@@ -42,7 +42,6 @@ namespace GameSystem.MoveCommandsProviders
                 commands.Add(command);
             }
 
-
             return commands;
         }
     }

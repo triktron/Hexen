@@ -5,6 +5,7 @@ using MoveSystem;
 using GameSystem.Modals;
 using System.Collections.Generic;
 using GameSystem.Utils;
+using GameSystem.MoveCommands;
 
 namespace GameSystem.Views
 {
@@ -22,13 +23,10 @@ namespace GameSystem.Views
             }
         }
 
-        private void Awake()
-        {
-            _pool = GetComponent<ObjectPool>();
-        }
-
         private void UpdateCommandProviderViews(IMoveCommandProvider<Piece> moveCommandProvider)
         {
+            if (_pool == null) _pool = GetComponent<ObjectPool>();
+
             foreach (var moveComandView in _moveComandsViews)
             {
                 moveComandView.gameObject.SetActive(false);
