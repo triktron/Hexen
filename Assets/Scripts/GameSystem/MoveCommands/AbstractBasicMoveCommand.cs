@@ -13,13 +13,13 @@ namespace GameSystem.MoveCommands
     public abstract class AbstractBasicMoveCommand : IMoveCommand<Modals.Piece>
     {
         protected ReplayManager ReplayManager;
-        public string Name;
-        internal Card Card;
+        internal string _name;
+        internal Card _card;
 
         protected AbstractBasicMoveCommand(ReplayManager replayManager, string name)
         {
             ReplayManager = replayManager;
-            Name = name;
+            _name = name;
         }
 
         public virtual bool CanExecute(Board<Modals.Piece> board, Modals.Piece piece)
@@ -64,5 +64,20 @@ namespace GameSystem.MoveCommands
 
         public abstract List<Tile> Tiles(Board<Modals.Piece> board, Modals.Piece piece);
         public abstract List<Tile> Action(Board<Modals.Piece> board, Modals.Piece piece, Tile tile);
+
+        public Card GetCard()
+        {
+            return _card;
+        }
+
+        public void SetCard(Card card)
+        {
+            _card = card;
+        }
+
+        public string GetName()
+        {
+            return _name;
+        }
     }
 }

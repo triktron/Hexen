@@ -35,9 +35,9 @@ namespace GameSystem.MoveCommandsProviders
             {
                 var cardName = deck.Cards[i].Name;
 
-                var command = Array.Find(types, type => ((AbstractBasicMoveCommand)type).Name == cardName);
+                var command = Array.Find(types, type => type.GetName() == cardName);
 
-                ((AbstractBasicMoveCommand)command).Card = deck.Cards[i];
+                command.SetCard(deck.Cards[i]);
 
                 commands.Add(command);
             }

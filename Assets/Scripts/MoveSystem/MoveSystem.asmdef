@@ -1,7 +1,8 @@
 {
     "name": "MoveSystem",
     "references": [
-        "GUID:ddbcb1afa46d7ec429738dc7afac995c"
+        "GUID:ddbcb1afa46d7ec429738dc7afac995c",
+        "GUID:e5a47cdd0c1868746b5360c3de6bc509"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -17,7 +17,7 @@ namespace GameSystem.Views
             set {
                 _modal = value;
 
-                GetComponentInChildren<Image>().sprite = ((AbstractBasicMoveCommand)_modal).Card.Icon;
+                GetComponentInChildren<Image>().sprite = _modal.GetCard().Icon;
             } 
         }
 
