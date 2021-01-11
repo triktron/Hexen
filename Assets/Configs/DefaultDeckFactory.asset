@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DefaultDeckFactory
   m_EditorClassIdentifier: 
   Cards:
-  - Name: Walk
+  - Name: Swipe
     Icon: {fileID: 21300000, guid: 128f3b0e5b025ae4aa7c06a262a277b3, type: 3}
   - Name: Teleport
     Icon: {fileID: 21300000, guid: 032cbae5e53136e41a877ec280e73fea, type: 3}
