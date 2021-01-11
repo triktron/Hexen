@@ -22,7 +22,7 @@ namespace GameSystem.Views
             }
         }
 
-        private void Start()
+        private void Awake()
         {
             _pool = GetComponent<ObjectPool>();
         }

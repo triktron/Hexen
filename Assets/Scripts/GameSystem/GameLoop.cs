@@ -48,7 +48,7 @@ namespace GameSystem
             var playGameState = new PlayGameState(Board, moveManager);
             _stateMachine.RegisterState(GameStates.Play, playGameState);
             _stateMachine.RegisterState(GameStates.Replay, new ReplayGameState(replayManager));
-            _stateMachine.MoveTo(GameStates.Play);
+            
 
             moveManager.Register(PlayerMoveCommandProvider.Name, new PlayerMoveCommandProvider(playGameState, replayManager));
 
@@ -56,6 +56,8 @@ namespace GameSystem
             ConnectPieceViews(moveManager);
             ConnectTileViews(Board);
             ConnectBoardView(Board);
+
+            _stateMachine.MoveTo(GameStates.Play);
         }
 
         private void ConnectBoardView(Board<Modals.Piece> board)

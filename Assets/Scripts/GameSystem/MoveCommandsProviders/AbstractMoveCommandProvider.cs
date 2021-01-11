@@ -23,7 +23,7 @@ namespace GameSystem.MoveCommandsProviders
 
         public List<IMoveCommand<Piece>> MoveCommands()
         {
-            return _commands.Where((command) => command.CanExecute(_playGameState.Board, _playGameState.SelectedPiece)).ToList();
+            return _commands.Where((command) => command.CanExecute(_playGameState.Board, _playGameState.PlayerPiece)).ToList();
         }
     }
 } 

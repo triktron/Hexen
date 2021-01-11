@@ -16,7 +16,7 @@ namespace GameSystem.Utils
         [SerializeField]
         private Transform _parent = null;
 
-        private void Start()
+        private void Awake()
         {
             for (int count = 0; count < _amount; count++)
             {
