@@ -19,5 +19,7 @@ MonoBehaviour:
     Icon: {fileID: 21300000, guid: 032cbae5e53136e41a877ec280e73fea, type: 3}
   - Name: Pushback
     Icon: {fileID: 21300000, guid: be213150f34b3714f9be7821d93c15e9, type: 3}
-  CardAmounts: 020000000200000002000000
+  - Name: LineAttack
+    Icon: {fileID: 21300000, guid: c0e388fe44b90184a893626eb2ff928c, type: 3}
+  CardAmounts: 02000000020000000200000002000000
   RandomizeOrder: 1
