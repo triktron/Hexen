@@ -9,9 +9,9 @@ namespace Deck
     public class Card
     {
         public string Name;
-        public Image Icon;
+        public Sprite Icon;
 
-        public Card(string name, Image icon)
+        public Card(string name, Sprite icon)
         {
             Name = name;
             Icon = icon;

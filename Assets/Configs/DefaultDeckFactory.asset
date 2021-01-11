@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Cards:
   - Name: Walk
-    Icon: {fileID: 0}
+    Icon: {fileID: 21300000, guid: 128f3b0e5b025ae4aa7c06a262a277b3, type: 3}
   - Name: Jump
-    Icon: {fileID: 0}
+    Icon: {fileID: 21300000, guid: 032cbae5e53136e41a877ec280e73fea, type: 3}
   CardAmounts: 0500000005000000
   RandomizeOrder: 1

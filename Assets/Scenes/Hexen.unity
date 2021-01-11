@@ -884,6 +884,14 @@ PrefabInstance:
       propertyPath: m_ReverseArrangement
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2596174320606369128, guid: 0f05db3d8fa51cb41a110f0ecbb9347b, type: 3}
+      propertyPath: m_ChildAlignment
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2596174320606369128, guid: 0f05db3d8fa51cb41a110f0ecbb9347b, type: 3}
+      propertyPath: m_Spacing
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5565431072970492286, guid: 0f05db3d8fa51cb41a110f0ecbb9347b, type: 3}
       propertyPath: m_Name
       value: MoveCommandProviderView
@@ -946,7 +954,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6313391719091023224, guid: 0f05db3d8fa51cb41a110f0ecbb9347b, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 50
+      value: 137
       objectReference: {fileID: 0}
     - target: {fileID: 6313391719091023224, guid: 0f05db3d8fa51cb41a110f0ecbb9347b, type: 3}
       propertyPath: m_AnchorMin.x
@@ -970,6 +978,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6313391719091023224, guid: 0f05db3d8fa51cb41a110f0ecbb9347b, type: 3}
       propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8970911717707861431, guid: 0f05db3d8fa51cb41a110f0ecbb9347b, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

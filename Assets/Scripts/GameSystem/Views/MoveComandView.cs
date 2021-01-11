@@ -6,12 +6,20 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using BoardSystem;
+using GameSystem.MoveCommands;
 
 namespace GameSystem.Views
 {
     public class MoveComandView : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
-        public IMoveCommand<Modals.Piece> Modal { get; set; }
+        public IMoveCommand<Modals.Piece> _modal;
+        public IMoveCommand<Modals.Piece> Modal { get => _modal;
+            set {
+                _modal = value;
+
+                GetComponentInChildren<Image>().sprite = ((AbstractBasicMoveCommand)_modal).Card.Icon;
+            } 
+        }
 
         private Canvas _canvas;
         private Transform _originalParent;

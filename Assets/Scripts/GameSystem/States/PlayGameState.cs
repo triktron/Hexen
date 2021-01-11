@@ -57,8 +57,6 @@ namespace GameSystem.States
 
                 _currentMoveComand.Execute(_board, _playerPiece, tile);
 
-                //_moveManager.Deactivate();
-
                 GameLoop.Instance.Board.Deck.Take(((AbstractBasicMoveCommand)_currentMoveComand).Card);
 
                 _currentMoveComand = null;
