@@ -16,7 +16,7 @@ namespace GameSystem.MoveCommandsProviders
     {
         public const string Name = "Player";
 
-        public PlayerMoveCommandProvider(PlayGameState playGameState, ReplayManager replayManager) : base(playGameState, new PlayerBasicMoveCommand(replayManager))
+        public PlayerMoveCommandProvider(PlayGameState playGameState, ReplayManager replayManager) : base(playGameState, new PlayerWalkMoveCommand(replayManager), new PlayerJumpMoveCommand(replayManager))
         {
         }
     }

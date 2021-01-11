@@ -1,7 +1,8 @@
 {
     "name": "BoardSystem",
     "references": [
-        "GUID:5340ed3268621f94ca5d980b2a596d78"
+        "GUID:5340ed3268621f94ca5d980b2a596d78",
+        "GUID:e5a47cdd0c1868746b5360c3de6bc509"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

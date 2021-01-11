@@ -11,9 +11,9 @@ using UnityEngine;
 
 namespace GameSystem.MoveCommands
 {
-    public class EnemyBasicMoveCommand : AbstractBasicMoveCommand
+    public class PlayerWalkMoveCommand : AbstractBasicMoveCommand
     {
-        public EnemyBasicMoveCommand(ReplayManager replayManager) : base(replayManager, "None")
+        public PlayerWalkMoveCommand(ReplayManager replayManager) : base(replayManager, "Walk")
         {
         }
 
@@ -30,7 +30,7 @@ namespace GameSystem.MoveCommands
 
         public override List<Tile> Action(Board<Modals.Piece> board, Modals.Piece _piece, Tile tile)
         {
-            var validTiles = new List<Tile>() {  };
+            var validTiles = new List<Tile>() { tile };
 
             return validTiles;
         }

@@ -72,6 +72,11 @@ namespace GameSystem.MoveProvider
             return this;
         }
 
+        public MovementHelper Diagonal(DiagonalEnum direction,params Validator[] validators)
+        {
+            return Collect(CubicHexCoord.DiagonalDiff(direction), validators: validators);
+        }
+
         public static bool CanCapture(Board<Modals.Piece> board, Modals.Piece piece, Tile tile)
         {
             return board.PieceAt(tile) != null;

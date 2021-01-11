@@ -1,4 +1,5 @@
 ﻿using BoardSystem;
+using Deck;
 using GameSystem.Modals;
 using HexGrid;
 using System;
@@ -12,6 +13,7 @@ namespace GameSystem.Views
         private PieceViewFactory _PieceViewFactory = null;
 
         private Board<Modals.Piece> _modal;
+
         public Board<Modals.Piece> Modal
         {
             set

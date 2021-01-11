@@ -1,4 +1,5 @@
 ﻿using BoardSystem;
+using Deck;
 using GameSystem.Modals;
 using MoveSystem;
 using ReplaySystem;
@@ -12,10 +13,13 @@ namespace GameSystem.MoveCommands
     public abstract class AbstractBasicMoveCommand : IMoveCommand<Modals.Piece>
     {
         protected ReplayManager ReplayManager;
+        public string Name;
+        internal Card Card;
 
-        protected AbstractBasicMoveCommand(ReplayManager replayManager)
+        protected AbstractBasicMoveCommand(ReplayManager replayManager, string name)
         {
             ReplayManager = replayManager;
+            Name = name;
         }
 
         public virtual bool CanExecute(Board<Modals.Piece> board, Modals.Piece piece)

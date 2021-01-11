@@ -11,16 +11,17 @@ using UnityEngine;
 
 namespace GameSystem.MoveCommands
 {
-    public class PlayerBasicMoveCommand : AbstractBasicMoveCommand
+    public class PlayerJumpMoveCommand : AbstractBasicMoveCommand
     {
-        public PlayerBasicMoveCommand(ReplayManager replayManager) : base(replayManager)
+        public PlayerJumpMoveCommand(ReplayManager replayManager) : base(replayManager, "Jump")
         {
         }
 
         public override List<Tile> Tiles(Board<Modals.Piece> board, Modals.Piece _piece)
         {
             var validTiles = new MovementHelper(board, _piece)
-                .Neigbours()
+                .Diagonal(DiagonalEnum.N)
+                .Diagonal(DiagonalEnum.S)
                 //.Collect(new CubicHexCoord(1,0,0), 2, MovementHelper.IsEmpty)
                 //.Collect(new CubicHexCoord(-1,0,0), 2, MovementHelper.IsEmpty)
                 .Generate();

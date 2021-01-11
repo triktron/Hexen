@@ -4,6 +4,7 @@ using GameSystem.Modals;
 using BoardSystem;
 using MoveSystem;
 using GameSystem.Views;
+using GameSystem.MoveCommands;
 
 namespace GameSystem.States
 {
@@ -58,7 +59,11 @@ namespace GameSystem.States
 
                 //_moveManager.Deactivate();
 
+                GameLoop.Instance.Board.Deck.Take(((AbstractBasicMoveCommand)_currentMoveComand).Card);
+
                 _currentMoveComand = null;
+
+                _moveManager.ActivateFor(_playerPiece);
             }
         }
         override public void Select(IMoveCommand<Modals.Piece> moveComand)

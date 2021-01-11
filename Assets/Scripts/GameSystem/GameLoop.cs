@@ -1,4 +1,5 @@
 ﻿using BoardSystem;
+using Deck;
 using GameSystem.Modals;
 using GameSystem.MoveCommandsProviders;
 using GameSystem.States;
@@ -64,6 +65,7 @@ namespace GameSystem
         {
             var boardView = FindObjectOfType<BoardView>();
             boardView.Modal = board;
+            board.Deck = FindObjectOfType<DeckSystem>();
         }
 
         private void ConnectTileViews(Board<Modals.Piece> board)

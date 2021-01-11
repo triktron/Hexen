@@ -1,4 +1,5 @@
-﻿using HexGrid;
+﻿using Deck;
+using HexGrid;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,6 +31,8 @@ namespace BoardSystem
         public readonly int Size;
 
         public List<Tile> Tiles => _tiles.Values.ToList();
+
+        public DeckSystem Deck;
 
         public void UnHightlight(List<Tile> tiles)
         {

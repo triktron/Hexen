@@ -7,8 +7,9 @@ namespace Deck
 {
     public class DeckSystem : MonoBehaviour
     {
-        DeckFactory Deck = null;
+        public DeckFactory Deck = null;
 
+        [HideInInspector]
         public List<Card> Cards = new List<Card>();
 
         private void Awake()
