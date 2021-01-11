@@ -9,10 +9,10 @@ namespace GameSystem.Views
     public class BoardView : MonoBehaviour
     {
         [SerializeField]
-        private ChessViewViewFactory _chessPieceViewFactory = null;
+        private PieceViewFactory _PieceViewFactory = null;
 
-        private Board<ChessPiece> _modal;
-        public Board<ChessPiece> Modal
+        private Board<Modals.Piece> _modal;
+        public Board<Modals.Piece> Modal
         {
             set
             {
@@ -28,12 +28,12 @@ namespace GameSystem.Views
             get => _modal;
         }
 
-        private void OnPiecePlaced(object sender, PiecePlacedEventArgs<ChessPiece> e)
+        private void OnPiecePlaced(object sender, PiecePlacedEventArgs<Modals.Piece> e)
         {
-            var board = sender as Board<ChessPiece>;
+            var board = sender as Board<Modals.Piece>;
             var piece = e.Piece;
 
-            _chessPieceViewFactory.CreateChessPieceView(board, piece);
+            _PieceViewFactory.CreatePieceView(board, piece);
         }
 
         private void OnDestroy()

@@ -8,12 +8,12 @@ using UnityEngine;
 
 namespace GameSystem.MoveCommandsProviders
 {
-    public abstract class AbstractMoveCommandProvider : IMoveCommandProvider<ChessPiece>
+    public abstract class AbstractMoveCommandProvider : IMoveCommandProvider<Piece>
     {
         //public const string Name = "";
-        private List<IMoveCommand<ChessPiece>> _commands;
+        private List<IMoveCommand<Piece>> _commands;
 
-        public AbstractMoveCommandProvider(PlayGameState playGameState, params IMoveCommand<ChessPiece>[] commands)
+        public AbstractMoveCommandProvider(PlayGameState playGameState, params IMoveCommand<Piece>[] commands)
         {
             _commands = commands.ToList();
             _playGameState = playGameState;
@@ -21,7 +21,7 @@ namespace GameSystem.MoveCommandsProviders
 
         public PlayGameState _playGameState { get; }
 
-        public List<IMoveCommand<ChessPiece>> MoveCommands()
+        public List<IMoveCommand<Piece>> MoveCommands()
         {
             return _commands.Where((command) => command.CanExecute(_playGameState.Board, _playGameState.SelectedPiece)).ToList();
         }

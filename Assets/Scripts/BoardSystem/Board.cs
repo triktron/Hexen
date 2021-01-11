@@ -51,7 +51,6 @@ namespace BoardSystem
             foreach (var tile in tiles)
             {
                 tile.Highlight = true;
-                Debug.Log($"Hightlighting {tile.Position.x} {tile.Position.y} {tile.Position.z}");
             }
         }
 

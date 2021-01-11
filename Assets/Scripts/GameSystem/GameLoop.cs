@@ -17,13 +17,13 @@ namespace GameSystem
 {
     public class GameLoop : MonoBehaviourSingleton<GameLoop>
     {
-        public Board<ChessPiece> Board { get; } = new Board<ChessPiece>(3);
+        public Board<Modals.Piece> Board { get; } = new Board<Modals.Piece>(3);
 
         StateMachine<GameStateBase> _stateMachine;
 
-        private void ConnectChessPieceViews(MoveManager<ChessPiece> moveManager)
+        private void ConnectPieceViews(MoveManager<Modals.Piece> moveManager)
         {
-            var pieceViews = FindObjectsOfType<ChessPieceView>();
+            var pieceViews = FindObjectsOfType<PieceView>();
 
             foreach (var pieceView in pieceViews)
             {
@@ -31,7 +31,7 @@ namespace GameSystem
                 var boardPosition = BoardPositionHelper.WorldToBoardPosition(worldPosition);
                 var tile = Board.TileAt(boardPosition);
 
-                var piece = new ChessPiece(pieceView.PlayerID, pieceView.MovementName);
+                var piece = new Modals.Piece(pieceView.PlayerID, pieceView.MovementName);
                 Board.Place(tile, piece);
                 moveManager.Register(piece, pieceView.MovementName);
                 pieceView.Modal = piece;
@@ -43,28 +43,28 @@ namespace GameSystem
             ReplayManager replayManager = new ReplayManager();
             _stateMachine = new StateMachine<GameStateBase>();
 
-            var moveManager = new MoveManager<ChessPiece>(Board);
+            var moveManager = new MoveManager<Modals.Piece>(Board);
 
             var playGameState = new PlayGameState(Board, moveManager);
             _stateMachine.RegisterState(GameStates.Play, playGameState);
             _stateMachine.RegisterState(GameStates.Replay, new ReplayGameState(replayManager));
             _stateMachine.MoveTo(GameStates.Play);
 
-            moveManager.Register(PawnMoveCommandProvider.Name, new PawnMoveCommandProvider(playGameState, replayManager));
+            moveManager.Register(PlayerMoveCommandProvider.Name, new PlayerMoveCommandProvider(playGameState, replayManager));
 
             ConnectMoveCommandProviderView(moveManager);
-            ConnectChessPieceViews(moveManager);
+            ConnectPieceViews(moveManager);
             ConnectTileViews(Board);
             ConnectBoardView(Board);
         }
 
-        private void ConnectBoardView(Board<ChessPiece> board)
+        private void ConnectBoardView(Board<Modals.Piece> board)
         {
             var boardView = FindObjectOfType<BoardView>();
             boardView.Modal = board;
         }
 
-        private void ConnectTileViews(Board<ChessPiece> board)
+        private void ConnectTileViews(Board<Modals.Piece> board)
         {
             var tileViews = FindObjectsOfType<TileView>();
 
@@ -75,22 +75,22 @@ namespace GameSystem
             }
         }
 
-        private void ConnectMoveCommandProviderView(MoveManager<ChessPiece> moveManager)
+        private void ConnectMoveCommandProviderView(MoveManager<Modals.Piece> moveManager)
         {
             var moveCommandProviderView = FindObjectOfType<MoveCommandProviderView>();
             moveManager.MoveComandProviderChanged += (sender, args) => moveCommandProviderView.Modal = args.MoveCommandProvider;
         }
 
-        public void Select(ChessPiece chessPiece)
+        public void Select(Modals.Piece piece)
         {
-            _stateMachine.CurrentSate.Select(chessPiece);
+            _stateMachine.CurrentSate.Select(piece);
         }
 
         public void Select(Tile tile)
         {
             _stateMachine.CurrentSate.Select(tile);
         }
-        public void Select(IMoveCommand<ChessPiece> moveComand)
+        public void Select(IMoveCommand<Modals.Piece> moveComand)
         {
             _stateMachine.CurrentSate.Select(moveComand);
         }

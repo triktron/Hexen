@@ -11,13 +11,13 @@ namespace GameSystem.MoveProvider
 {
     public class MovementHelper
     {
-        public delegate bool Validator(Board<ChessPiece> board, ChessPiece piece, Tile toTile);
+        public delegate bool Validator(Board<Modals.Piece> board, Modals.Piece piece, Tile toTile);
 
-        private Board<ChessPiece> _board;
-        private ChessPiece _piece;
+        private Board<Modals.Piece> _board;
+        private Modals.Piece _piece;
         private List<Tile> _validTile = new List<Tile>();
 
-        public MovementHelper(Board<ChessPiece> board, ChessPiece piece)
+        public MovementHelper(Board<Modals.Piece> board, Modals.Piece piece)
         {
             _board = board;
             _piece = piece;
@@ -72,12 +72,12 @@ namespace GameSystem.MoveProvider
             return this;
         }
 
-        public static bool CanCapture(Board<ChessPiece> board, ChessPiece piece, Tile tile)
+        public static bool CanCapture(Board<Modals.Piece> board, Modals.Piece piece, Tile tile)
         {
             return board.PieceAt(tile) != null;
         }
 
-        public static bool IsEmpty(Board<ChessPiece> board, ChessPiece piece, Tile tile)
+        public static bool IsEmpty(Board<Modals.Piece> board, Modals.Piece piece, Tile tile)
         {
             return board.PieceAt(tile) == null;
         }

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5182c17eadd5bea4c883b9d0a3354134, type: 3}
+  m_Name: DefaultPieceViewFactory
+  m_EditorClassIdentifier: 
+  _players:
+  - {fileID: 26124709553570381, guid: 4c9b3401a029bef4ab36a4180945d809, type: 3}
+  - {fileID: 6916944235745691184, guid: 8cc284075f8b4994c9a0fcb36cb731d3, type: 3}
+  _movementNames:
+  - Player
+  - Enemy

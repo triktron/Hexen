@@ -14,7 +14,7 @@ namespace GameSystem.Views
         private List<MoveComandView> _moveComandsViews = new List<MoveComandView>();
         private ObjectPool _pool;
 
-        public IMoveCommandProvider<ChessPiece> Modal
+        public IMoveCommandProvider<Piece> Modal
         {
             set
             {
@@ -27,7 +27,7 @@ namespace GameSystem.Views
             _pool = GetComponent<ObjectPool>();
         }
 
-        private void UpdateCommandProviderViews(IMoveCommandProvider<ChessPiece> moveCommandProvider)
+        private void UpdateCommandProviderViews(IMoveCommandProvider<Piece> moveCommandProvider)
         {
             foreach (var moveComandView in _moveComandsViews)
             {

@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace GameSystem.MoveCommands
 {
-    public abstract class AbstractBasicMoveCommand : IMoveCommand<ChessPiece>
+    public abstract class AbstractBasicMoveCommand : IMoveCommand<Modals.Piece>
     {
         protected ReplayManager ReplayManager;
 
@@ -18,13 +18,13 @@ namespace GameSystem.MoveCommands
             ReplayManager = replayManager;
         }
 
-        public virtual bool CanExecute(Board<ChessPiece> board, ChessPiece piece)
+        public virtual bool CanExecute(Board<Modals.Piece> board, Modals.Piece piece)
         {
             if (Tiles(board, piece).Count == 0) return false;
             return true;
         }
 
-        public virtual void Execute(Board<ChessPiece> board, ChessPiece piece, Tile toTile)
+        public virtual void Execute(Board<Modals.Piece> board, Modals.Piece piece, Tile toTile)
         {
             var toPiece = board.PieceAt(toTile);
             var fromTile = board.TileOf(piece);
@@ -58,6 +58,6 @@ namespace GameSystem.MoveCommands
             ReplayManager.Execute(replayComand);
         }
 
-        public abstract List<Tile> Tiles(Board<ChessPiece> board, ChessPiece piece);
+        public abstract List<Tile> Tiles(Board<Modals.Piece> board, Modals.Piece piece);
     }
 }

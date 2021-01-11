@@ -17,14 +17,14 @@ namespace GameSystem.States
         {
         }
 
-        virtual public void Select(ChessPiece chessPiece)
+        virtual public void Select(Modals.Piece piece)
         {
         }
 
         virtual public void Select(Tile tile)
         {
         }
-        virtual public void Select(IMoveCommand<ChessPiece> moveComand)
+        virtual public void Select(IMoveCommand<Modals.Piece> moveComand)
         {
         }
         virtual public void Forward()

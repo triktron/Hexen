@@ -8,7 +8,7 @@ namespace GameSystem.Views
 {
     public class MoveComandView : MonoBehaviour, IPointerClickHandler
     {
-        public IMoveCommand<ChessPiece> Modal { get; set; }
+        public IMoveCommand<Piece> Modal { get; set; }
 
         public void OnPointerClick(PointerEventData eventData)
         {

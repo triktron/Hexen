@@ -8,19 +8,19 @@ namespace GameSystem.States
 {
     public class PlayGameState : GameStateBase
     {
-        private ChessPiece _selectedPiece;
-        public ChessPiece SelectedPiece => _selectedPiece;
+        private Modals.Piece _selectedPiece;
+        public Modals.Piece SelectedPiece => _selectedPiece;
 
-        private int _currentPlayerID;
+        private int _currentPlayerID = 0;
         public int CurrentPlayerID => _currentPlayerID;
-        private IMoveCommand<ChessPiece> _currentMoveComand;
+        private IMoveCommand<Modals.Piece> _currentMoveComand;
 
-        Board<ChessPiece> _board;
-        MoveManager<ChessPiece> _moveManager;
+        Board<Modals.Piece> _board;
+        MoveManager<Modals.Piece> _moveManager;
 
-        public Board<ChessPiece> Board => _board;
+        public Board<Modals.Piece> Board => _board;
 
-        public PlayGameState(Board<ChessPiece> board, MoveManager<ChessPiece> moveManager)
+        public PlayGameState(Board<Modals.Piece> board, MoveManager<Modals.Piece> moveManager)
         {
             _moveManager = moveManager;
             _board = board;
@@ -39,13 +39,13 @@ namespace GameSystem.States
             _moveManager.MoveComandProviderChanged -= OnMoveComandManagerChanged;
         }
 
-        override public void Select(ChessPiece chessPiece)
+        override public void Select(Modals.Piece piece)
         {
-            if (chessPiece == null || _selectedPiece == chessPiece) return;
+            if (piece == null || _selectedPiece == piece) return;
 
-            if (chessPiece != null && chessPiece.PlayerID != CurrentPlayerID)
+            if (piece != null && piece.PlayerID != CurrentPlayerID)
             {
-                var tile = _board.TileOf(chessPiece);
+                var tile = _board.TileOf(piece);
                 Select(tile);
                 return;
             }
@@ -54,7 +54,7 @@ namespace GameSystem.States
             _moveManager.Deactivate();
 
 
-            _selectedPiece = chessPiece;
+            _selectedPiece = piece;
 
             _moveManager.ActivateFor(_selectedPiece);
         }
@@ -76,7 +76,7 @@ namespace GameSystem.States
                 _currentMoveComand = null;
             }
         }
-        override public void Select(IMoveCommand<ChessPiece> moveComand)
+        override public void Select(IMoveCommand<Modals.Piece> moveComand)
         {
             if (_currentMoveComand != null)
                 _board.UnHightlight(_currentMoveComand.Tiles(_board, _selectedPiece));
@@ -87,7 +87,7 @@ namespace GameSystem.States
                 _board.Highlight(_currentMoveComand.Tiles(_board, _selectedPiece));
         }
 
-        private void OnMoveComandManagerChanged(object sender, MoveCommandProviderChanged<ChessPiece> e)
+        private void OnMoveComandManagerChanged(object sender, MoveCommandProviderChanged<Modals.Piece> e)
         {
             if (_currentMoveComand == null || _selectedPiece == null) return;
             var tiles = _currentMoveComand.Tiles(_board, _selectedPiece);
