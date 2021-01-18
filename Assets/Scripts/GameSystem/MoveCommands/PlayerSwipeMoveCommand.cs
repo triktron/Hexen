@@ -2,12 +2,8 @@
 using GameSystem.Modals;
 using GameSystem.MoveProvider;
 using HexGrid;
-using HexGrid.Enum;
-using MoveSystem;
 using ReplaySystem;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace GameSystem.MoveCommands
 {
@@ -17,7 +13,7 @@ namespace GameSystem.MoveCommands
         {
         }
 
-        public override List<Tile> Tiles(Board<Modals.Piece> board, Modals.Piece _piece)
+        public override List<Tile> Tiles(Board<Piece> board, Piece _piece)
         {
             var validTiles = new MovementHelper(board, _piece)
                 .Neigbours(1)
@@ -26,7 +22,7 @@ namespace GameSystem.MoveCommands
             return validTiles;
         }
 
-        public override List<Tile> Action(Board<Modals.Piece> board, Modals.Piece piece, Tile tile)
+        public override List<Tile> Action(Board<Piece> board, Piece piece, Tile tile)
         {
             var validTiles = new List<Tile>();
             if (piece == null || tile == null) return validTiles;
@@ -56,7 +52,7 @@ namespace GameSystem.MoveCommands
             return validTiles;
         }
 
-        public override void Execute(Board<Modals.Piece> board, Modals.Piece piece, Tile toTile)
+        public override void Execute(Board<Piece> board, Piece piece, Tile toTile)
         {
             var tilesToSwipe = Action(board, piece, toTile);
 

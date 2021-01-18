@@ -1,10 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.EventSystems;
-using System;
-using BoardSystem;
-
-namespace BoardSystem
+﻿namespace BoardSystem
 {
     public interface IPiece<TPiece> where TPiece : class, IPiece<TPiece>
     {

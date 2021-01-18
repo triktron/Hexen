@@ -1,6 +1,4 @@
-﻿using BoardSystem;
-using HexGrid;
-using System.Collections;
+﻿using HexGrid;
 using System.Collections.Generic;
 using UnityEngine;
 

@@ -1,29 +1,27 @@
 ﻿using UnityEngine;
-using System.Collections;
 using GameSystem.Modals;
 using BoardSystem;
 using MoveSystem;
 using GameSystem.Views;
-using GameSystem.MoveCommands;
 
 namespace GameSystem.States
 {
     public class PlayGameState : GameStateBase
     {
-        private Modals.Piece _playerPiece;
-        public Modals.Piece PlayerPiece => _playerPiece;
+        private Piece _playerPiece;
+        public Piece PlayerPiece => _playerPiece;
 
-        private IMoveCommand<Modals.Piece> _currentMoveComand;
+        private IMoveCommand<Piece> _currentMoveComand;
 
-        Board<Modals.Piece> _board;
-        MoveManager<Modals.Piece> _moveManager;
+        Board<Piece> _board;
+        MoveManager<Piece> _moveManager;
 
-        public Board<Modals.Piece> Board => _board;
+        public Board<Piece> Board => _board;
 
         private float _movesAllowed = 2;
         private float _movesLeft;
 
-        public PlayGameState(Board<Modals.Piece> board, MoveManager<Modals.Piece> moveManager)
+        public PlayGameState(Board<Piece> board, MoveManager<Piece> moveManager)
         {
             _moveManager = moveManager;
             _board = board;
@@ -84,7 +82,7 @@ namespace GameSystem.States
                 if (_movesLeft == 0) StateMachine.MoveTo(GameStates.EnemyPhase1);
             }
         }
-        override public void Select(IMoveCommand<Modals.Piece> moveComand)
+        override public void Select(IMoveCommand<Piece> moveComand)
         {
             if (_currentMoveComand != null)
                 _board.UnHightlight(_currentMoveComand.Tiles(_board, _playerPiece));
@@ -95,7 +93,7 @@ namespace GameSystem.States
                 _board.Highlight(_currentMoveComand.Tiles(_board, _playerPiece));
         }
 
-        private void OnMoveComandManagerChanged(object sender, MoveCommandProviderChanged<Modals.Piece> e)
+        private void OnMoveComandManagerChanged(object sender, MoveCommandProviderChanged<Piece> e)
         {
             if (_currentMoveComand == null || _playerPiece == null) return;
             var tiles = _currentMoveComand.Tiles(_board, _playerPiece);

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using GameSystem.Modals;
 using BoardSystem;
@@ -16,7 +15,7 @@ namespace GameSystem.Views
         [SerializeField]
         private List<string> _movementNames = new List<string>();
 
-        public PieceView CreatePieceView(Board<Modals.Piece> board, Modals.Piece modal)
+        public PieceView CreatePieceView(Board<Piece> board, Piece modal)
         {
             var index = _movementNames.IndexOf(modal.MovementName);
             var prefab = _players[index];

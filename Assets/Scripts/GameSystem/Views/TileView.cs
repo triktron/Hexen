@@ -1,10 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.EventSystems;
 using BoardSystem;
 using System;
-using UnityEngine.UI;
-using System.Collections.Generic;
 
 namespace GameSystem.Views
 {

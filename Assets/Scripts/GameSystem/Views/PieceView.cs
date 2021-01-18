@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.EventSystems;
 using GameSystem.Modals;
 using System;
 using BoardSystem;
@@ -20,8 +18,8 @@ namespace GameSystem.Views
         [SerializeField]
         private string _movementName = null;
 
-        private Modals.Piece _modal;
-        public Modals.Piece Modal
+        private Piece _modal;
+        public Piece Modal
         {
             get => _modal;
             set

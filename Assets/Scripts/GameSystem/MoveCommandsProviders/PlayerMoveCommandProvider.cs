@@ -1,10 +1,4 @@
-﻿using UnityEngine;
-using UnityEditor;
-using MoveSystem;
-using GameSystem.Modals;
-using System.Collections.Generic;
-using BoardSystem;
-using GameSystem.MoveCommands;
+﻿using GameSystem.MoveCommands;
 using ReplaySystem;
 using GameSystem.States;
 using Utils;

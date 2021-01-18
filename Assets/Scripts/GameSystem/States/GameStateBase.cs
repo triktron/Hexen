@@ -20,7 +20,7 @@ namespace GameSystem.States
         virtual public void Select(Tile tile)
         {
         }
-        virtual public void Select(IMoveCommand<Modals.Piece> moveComand)
+        virtual public void Select(IMoveCommand<Piece> moveComand)
         {
         }
         virtual public void Forward()

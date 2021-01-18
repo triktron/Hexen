@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
 using UnityEditor;
-using System;
-using System.Collections.Generic;
-using HexGrid;
 using BoardSystem;
 
 public class BoardGenerator : EditorWindow

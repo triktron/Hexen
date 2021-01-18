@@ -1,15 +1,19 @@
 ﻿using BoardSystem;
-using HexGrid;
-using System;
+using GameSystem.Modals;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GameSystem.States
 {
     class EnemyPhase1GameState : GameStateBase
     {
+        private Board<Piece> _board;
+        public EnemyPhase1GameState(Board<Piece> board)
+        {
+            _board = board;
+        }
+
+
         public override void OnEnter()
         {
             RandomizeEnemyPositions();
@@ -19,9 +23,9 @@ namespace GameSystem.States
 
         private void RandomizeEnemyPositions()
         {
-            var enemies = new List<Modals.Piece>();
+            var enemies = new List<Piece>();
 
-            foreach (var piece in GameLoop.Instance.Board.Pieces)
+            foreach (var piece in _board.Pieces)
             {
                 if (piece.PlayerID == 1) enemies.Add(piece);
             }
@@ -32,11 +36,11 @@ namespace GameSystem.States
 
                 var origin = enemy.QueuedPath.First();
                 var destination = enemy.QueuedPath.Last();
-                var destinationPiece = GameLoop.Instance.Board.PieceAt(destination);
+                var destinationPiece = _board.PieceAt(destination);
 
                 if (destinationPiece == null)
                 {
-                    GameLoop.Instance.Board.Move(origin, destination);
+                    _board.Move(origin, destination);
                 }
 
                 enemy.QueuedPath.Clear();

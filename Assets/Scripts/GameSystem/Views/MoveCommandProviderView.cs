@@ -1,11 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System;
 using MoveSystem;
 using GameSystem.Modals;
 using System.Collections.Generic;
 using GameSystem.Utils;
-using GameSystem.MoveCommands;
 
 namespace GameSystem.Views
 {

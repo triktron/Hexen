@@ -19,13 +19,13 @@ namespace GameSystem
 {
     public class GameLoop : MonoBehaviourSingleton<GameLoop>
     {
-        public Board<Modals.Piece> Board { get; } = new Board<Modals.Piece>(3);
+        public Board<Piece> Board { get; } = new Board<Piece>(3);
 
         StateMachine<GameStateBase> _stateMachine;
 
         private LayerMask _tileLayer;
 
-        private void ConnectPieceViews(MoveManager<Modals.Piece> moveManager)
+        private void ConnectPieceViews(MoveManager<Piece> moveManager)
         {
             var pieceViews = FindObjectsOfType<PieceView>();
 
@@ -35,7 +35,7 @@ namespace GameSystem
                 var boardPosition = BoardPositionHelper.WorldToBoardPosition(worldPosition);
                 var tile = Board.TileAt(boardPosition);
 
-                var piece = new Modals.Piece(pieceView.PlayerID, pieceView.MovementName);
+                var piece = new Piece(pieceView.PlayerID, pieceView.MovementName);
                 Board.Place(tile, piece);
                 moveManager.Register(piece, pieceView.MovementName);
                 pieceView.Modal = piece;
@@ -52,11 +52,11 @@ namespace GameSystem
             ReplayManager replayManager = new ReplayManager();
             _stateMachine = new StateMachine<GameStateBase>();
 
-            var moveManager = new MoveManager<Modals.Piece>(Board);
+            var moveManager = new MoveManager<Piece>(Board);
 
             var playGameState = new PlayGameState(Board, moveManager);
-            _stateMachine.RegisterState(GameStates.EnemyPhase1, new EnemyPhase1GameState());
-            _stateMachine.RegisterState(GameStates.EnemyPhase2, new EnemyPhase2GameState());
+            _stateMachine.RegisterState(GameStates.EnemyPhase1, new EnemyPhase1GameState(Board));
+            _stateMachine.RegisterState(GameStates.EnemyPhase2, new EnemyPhase2GameState(Board));
             _stateMachine.RegisterState(GameStates.Play, playGameState);
 
 
@@ -75,14 +75,14 @@ namespace GameSystem
             _stateMachine.CurrentSate.Hover(GetTileUnderMouse());
         }
 
-        private void ConnectBoardView(Board<Modals.Piece> board)
+        private void ConnectBoardView(Board<Piece> board)
         {
             var boardView = FindObjectOfType<BoardView>();
             boardView.Modal = board;
             board.Deck = FindObjectOfType<DeckSystem>();
         }
 
-        private void ConnectTileViews(Board<Modals.Piece> board)
+        private void ConnectTileViews(Board<Piece> board)
         {
             var tileViews = FindObjectsOfType<TileView>();
 
@@ -93,7 +93,7 @@ namespace GameSystem
             }
         }
 
-        private void ConnectMoveCommandProviderView(MoveManager<Modals.Piece> moveManager)
+        private void ConnectMoveCommandProviderView(MoveManager<Piece> moveManager)
         {
             var moveCommandProviderView = FindObjectOfType<MoveCommandProviderView>();
             moveManager.MoveComandProviderChanged += (sender, args) => moveCommandProviderView.Modal = args.MoveCommandProvider;
@@ -103,7 +103,7 @@ namespace GameSystem
         {
             _stateMachine.CurrentSate.Select(GetTileUnderMouse());
         }
-        public void Select(IMoveCommand<Modals.Piece> moveComand)
+        public void Select(IMoveCommand<Piece> moveComand)
         {
             _stateMachine.CurrentSate.Select(moveComand);
         }

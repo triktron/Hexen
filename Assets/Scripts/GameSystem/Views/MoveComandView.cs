@@ -1,19 +1,15 @@
 ﻿using UnityEngine;
-using System.Collections;
 using MoveSystem;
 using GameSystem.Modals;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using System.Collections.Generic;
-using BoardSystem;
-using GameSystem.MoveCommands;
 
 namespace GameSystem.Views
 {
     public class MoveComandView : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
     {
-        public IMoveCommand<Modals.Piece> _modal;
-        public IMoveCommand<Modals.Piece> Modal { get => _modal;
+        public IMoveCommand<Piece> _modal;
+        public IMoveCommand<Piece> Modal { get => _modal;
             set {
                 _modal = value;
 

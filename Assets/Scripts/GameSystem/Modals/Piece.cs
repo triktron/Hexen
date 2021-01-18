@@ -1,8 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BoardSystem;
-using UnityEngine.EventSystems;
 using System;
 
 namespace GameSystem.Modals

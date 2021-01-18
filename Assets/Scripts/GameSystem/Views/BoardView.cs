@@ -1,8 +1,5 @@
 ﻿using BoardSystem;
-using Deck;
 using GameSystem.Modals;
-using HexGrid;
-using System;
 using UnityEngine;
 
 namespace GameSystem.Views
@@ -12,9 +9,9 @@ namespace GameSystem.Views
         [SerializeField]
         private PieceViewFactory _PieceViewFactory = null;
 
-        private Board<Modals.Piece> _modal;
+        private Board<Piece> _modal;
 
-        public Board<Modals.Piece> Modal
+        public Board<Piece> Modal
         {
             set
             {
@@ -30,9 +27,9 @@ namespace GameSystem.Views
             get => _modal;
         }
 
-        private void OnPiecePlaced(object sender, PiecePlacedEventArgs<Modals.Piece> e)
+        private void OnPiecePlaced(object sender, PiecePlacedEventArgs<Piece> e)
         {
-            var board = sender as Board<Modals.Piece>;
+            var board = sender as Board<Piece>;
             var piece = e.Piece;
 
             _PieceViewFactory.CreatePieceView(board, piece);

@@ -2,29 +2,27 @@
 using GameSystem.Modals;
 using HexGrid;
 using HexGrid.Enum;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace GameSystem.MoveProvider
 {
     public class MovementHelper
     {
-        public delegate bool Validator(Board<Modals.Piece> board, Modals.Piece piece, Tile toTile);
+        public delegate bool Validator(Board<Piece> board, Piece piece, Tile toTile);
 
         private Board<Piece> _board;
         private Piece _piece = null;
         private Tile _tile = null;
         private List<Tile> _validTile = new List<Tile>();
 
-        public MovementHelper(Board<Modals.Piece> board, Modals.Piece piece)
+        public MovementHelper(Board<Piece> board, Piece piece)
         {
             _board = board;
             _piece = piece;
         }
 
-        public MovementHelper(Board<Modals.Piece> board, Tile tile)
+        public MovementHelper(Board<Piece> board, Tile tile)
         {
             _board = board;
             _tile = tile;
@@ -102,17 +100,17 @@ namespace GameSystem.MoveProvider
             return Collect(CubicHexCoord.DiagonalDiff(direction), validators: validators);
         }
 
-        public static bool CanCapture(Board<Modals.Piece> board, Modals.Piece piece, Tile tile)
+        public static bool CanCapture(Board<Piece> board, Piece piece, Tile tile)
         {
             return board.PieceAt(tile) != null;
         }
 
-        public static bool IsEmpty(Board<Modals.Piece> board, Modals.Piece piece, Tile tile)
+        public static bool IsEmpty(Board<Piece> board, Piece piece, Tile tile)
         {
             return board.PieceAt(tile) == null;
         }
 
-        public static bool IsNotPlayer(Board<Modals.Piece> board, Modals.Piece piece, Tile tile)
+        public static bool IsNotPlayer(Board<Piece> board, Piece piece, Tile tile)
         {
             return board.TileOf(piece).Position != tile.Position;
         }

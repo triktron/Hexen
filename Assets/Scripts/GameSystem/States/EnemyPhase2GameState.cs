@@ -1,42 +1,43 @@
 ﻿using BoardSystem;
 using GameSystem.Modals;
 using GameSystem.MoveProvider;
-using HexGrid;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
 using Utils;
 
 namespace GameSystem.States
 {
     class EnemyPhase2GameState : GameStateBase
     {
+        private Board<Piece> _board;
+        public EnemyPhase2GameState(Board<Piece> board)
+        {
+            _board = board;
+        }
+
         public override void OnEnter()
         {
-            RandomizeEnemyPositions();
+            GeneratePaths();
 
             StateMachine.MoveTo(GameStates.Play);
         }
 
-        private void RandomizeEnemyPositions()
+        private void GeneratePaths()
         {
             var enemies = new List<Piece>();
             Piece player = null;
 
-            foreach (var piece in GameLoop.Instance.Board.Pieces)
+            foreach (var piece in _board.Pieces)
             {
                 if (piece.PlayerID == 0) player = piece;
                 if (piece.PlayerID == 1) enemies.Add(piece);
             }
 
             var availebleEnemies = enemies.ToList();
-            var playerNeigberingTiles = GetPositionsAroundPlayer(player);
+            var playerTile = _board.TileOf(player);
+            var playerNeigberingTiles = Neighbours(_board, playerTile);
 
-
-            List<Tile> NeighbourStrategy(Tile t) => Neighbours(GameLoop.Instance.Board, t);
+            List<Tile> NeighbourStrategy(Tile t) => Neighbours(_board, t);
             var pf = new AStarPathFinding<Tile>(NeighbourStrategy, Distance, Distance);
 
             foreach (var toTile in playerNeigberingTiles)
@@ -46,7 +47,7 @@ namespace GameSystem.States
 
                 for (int i = 0; i < availebleEnemies.Count; i++)
                 {
-                    var fromTile = GameLoop.Instance.Board.TileOf(availebleEnemies[i]);
+                    var fromTile = _board.TileOf(availebleEnemies[i]);
 
                     path = pf.Path(fromTile, toTile);
 
@@ -64,18 +65,10 @@ namespace GameSystem.States
         {
             return from.Position.DistanceTo(to.Position);
         }
+
         private List<Tile> Neighbours(Board<Piece> board, Tile from)
         {
             var validTiles = new MovementHelper(board, from)
-                .Neigbours(1, MovementHelper.IsEmpty)
-                .Generate();
-
-            return validTiles;
-        }
-
-        private List<Tile> GetPositionsAroundPlayer(Piece player)
-        {
-            var validTiles = new MovementHelper(GameLoop.Instance.Board, player)
                 .Neigbours(1, MovementHelper.IsEmpty)
                 .Generate();
 
