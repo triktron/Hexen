@@ -33,9 +33,9 @@ namespace GameSystem.States
                 if (piece.PlayerID == 1) enemies.Add(piece);
             }
 
-            var availebleEnemies = enemies.ToList();
             var playerTile = _board.TileOf(player);
             var playerNeigberingTiles = Neighbours(_board, playerTile);
+            var availebleEnemies = enemies.ToList().FindAll(e => !playerNeigberingTiles.Contains(_board.TileOf(e)));
 
             List<Tile> NeighbourStrategy(Tile t) => Neighbours(_board, t);
             var pf = new AStarPathFinding<Tile>(NeighbourStrategy, Distance, Distance);

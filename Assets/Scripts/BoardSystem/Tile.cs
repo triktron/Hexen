@@ -1,5 +1,6 @@
 ﻿using HexGrid;
 using System;
+using System.Collections.Generic;
 
 namespace BoardSystem
 {
@@ -25,6 +26,17 @@ namespace BoardSystem
         {
             EventHandler handler = HightlightStatusChanged;
             handler?.Invoke(this, args);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Tile tile &&
+                   EqualityComparer<CubicHexCoord>.Default.Equals(Position, tile.Position);
+        }
+
+        public override int GetHashCode()
+        {
+            return Position.GetHashCode();
         }
     }
 }
