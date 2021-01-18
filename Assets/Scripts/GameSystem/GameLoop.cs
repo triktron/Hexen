@@ -47,9 +47,10 @@ namespace GameSystem
             var moveManager = new MoveManager<Modals.Piece>(Board);
 
             var playGameState = new PlayGameState(Board, moveManager);
+            _stateMachine.RegisterState(GameStates.EnemyPhase1, new EnemyPhase1GameState());
+            _stateMachine.RegisterState(GameStates.EnemyPhase2, new EnemyPhase2GameState());
             _stateMachine.RegisterState(GameStates.Play, playGameState);
-            _stateMachine.RegisterState(GameStates.Replay, new ReplayGameState(replayManager));
-            
+
 
             moveManager.Register(PlayerMoveCommandProvider.Name, new PlayerMoveCommandProvider(playGameState, replayManager));
 

@@ -31,6 +31,7 @@ namespace BoardSystem
         public readonly int Size;
 
         public List<Tile> Tiles => _tiles.Values.ToList();
+        public List<TPiece> Pieces => _values;
 
         public DeckSystem Deck;
 

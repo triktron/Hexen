@@ -28,13 +28,21 @@ namespace GameSystem.States
 
         public override void OnEnter()
         {
-            var playerView = GameObject.FindGameObjectWithTag("Player");
-            var playerPieceView = playerView.GetComponent<PieceView>();
-            _playerPiece = playerPieceView.Modal;
+            InitializePlayer();
 
             _moveManager.MoveComandProviderChanged += OnMoveComandManagerChanged;
 
             _moveManager.ActivateFor(_playerPiece);
+        }
+
+        private void InitializePlayer()
+        {
+            if (_playerPiece == null)
+            {
+                var playerView = GameObject.FindGameObjectWithTag("Player");
+                var playerPieceView = playerView.GetComponent<PieceView>();
+                _playerPiece = playerPieceView.Modal;
+            }
         }
 
         public override void OnExit()
@@ -57,11 +65,13 @@ namespace GameSystem.States
 
                 _currentMoveComand.Execute(_board, _playerPiece, tile);
 
-                GameLoop.Instance.Board.Deck.Take(((AbstractBasicMoveCommand)_currentMoveComand)._card);
+                GameLoop.Instance.Board.Deck.Take((_currentMoveComand).GetCard());
 
                 _currentMoveComand = null;
 
                 _moveManager.ActivateFor(_playerPiece);
+
+                StateMachine.MoveTo(GameStates.EnemyPhase1);
             }
         }
         override public void Select(IMoveCommand<Modals.Piece> moveComand)
