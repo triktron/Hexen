@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Hexen</title>
+    <style media="screen">
+      body {
+        text-align: center;
+        margin: 0;
+        overflow: hidden;
+        background-color: #68615b;
+        background: linear-gradient(180deg, rgb(105 98 92) 0%, rgb(104 97 91) 100%);
+      }
+
+      canvas {
+        background: #68615b;
+        background: linear-gradient(180deg, rgb(105 98 92) 0%, rgb(104 97 91) 100%);
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="unity-canvas"></canvas>
+    <script src="Build/WebGL.loader.js"></script>
+    <script>
+
+      var size = Math.min(innerHeight, innerWidth);
+
+      var c = document.getElementById('unity-canvas');
+      c.style.width = size + "px";
+      c.style.height = size + "px";
+
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        dataUrl: "Build/WebGL.data",
+        frameworkUrl: "Build/WebGL.framework.js",
+        codeUrl: "Build/WebGL.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "Triktron",
+        productName: "Hexen",
+        productVersion: "0.1",
+      });
+    </script>
+  </body>
+</html>
