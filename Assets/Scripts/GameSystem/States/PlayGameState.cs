@@ -20,6 +20,9 @@ namespace GameSystem.States
 
         public Board<Modals.Piece> Board => _board;
 
+        private float _movesAllowed = 2;
+        private float _movesLeft;
+
         public PlayGameState(Board<Modals.Piece> board, MoveManager<Modals.Piece> moveManager)
         {
             _moveManager = moveManager;
@@ -33,6 +36,8 @@ namespace GameSystem.States
             _moveManager.MoveComandProviderChanged += OnMoveComandManagerChanged;
 
             _moveManager.ActivateFor(_playerPiece);
+
+            _movesLeft = _movesAllowed;
         }
 
         private void InitializePlayer()
@@ -71,7 +76,8 @@ namespace GameSystem.States
 
                 _moveManager.ActivateFor(_playerPiece);
 
-                StateMachine.MoveTo(GameStates.EnemyPhase1);
+                _movesLeft--;
+                if (_movesLeft == 0) StateMachine.MoveTo(GameStates.EnemyPhase1);
             }
         }
         override public void Select(IMoveCommand<Modals.Piece> moveComand)
