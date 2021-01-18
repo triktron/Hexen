@@ -66,17 +66,21 @@ namespace GameSystem.States
                 
                 _board.UnHightlight(tiles);
 
-                if (!tiles.Contains(tile)) return;
+                if (tiles.Contains(tile))
+                {
+                    _currentMoveComand.Execute(_board, _playerPiece, tile);
 
-                _currentMoveComand.Execute(_board, _playerPiece, tile);
+                    GameLoop.Instance.Board.Deck.Take((_currentMoveComand).GetCard());
+                    _movesLeft--;
+                }
 
-                GameLoop.Instance.Board.Deck.Take((_currentMoveComand).GetCard());
+                
 
                 _currentMoveComand = null;
 
                 _moveManager.ActivateFor(_playerPiece);
 
-                _movesLeft--;
+                
                 if (_movesLeft == 0) StateMachine.MoveTo(GameStates.EnemyPhase1);
             }
         }

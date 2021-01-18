@@ -55,7 +55,6 @@ namespace GameSystem.Views
         {
             GameLoop.Instance.Select();
 
-
             transform.SetParent(_originalParent);
             transform.SetSiblingIndex(_originalSiblingIndex);
         }
