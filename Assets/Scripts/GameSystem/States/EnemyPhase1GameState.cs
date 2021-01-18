@@ -28,18 +28,15 @@ namespace GameSystem.States
 
             foreach (var enemy in enemies)
             {
-                var tile = GameLoop.Instance.Board.TileOf(enemy);
-                var tileright = tile.Position + new CubicHexCoord(1, -1, 0);
-                var aboveTile = GameLoop.Instance.Board.TileAt(tileright);
+                if (enemy.QueuedPath.Count == 0) continue;
 
-                if (aboveTile != null)
+                var origin = enemy.QueuedPath.First();
+                var destination = enemy.QueuedPath.Last();
+                var destinationPiece = GameLoop.Instance.Board.PieceAt(destination);
+
+                if (destinationPiece == null)
                 {
-                    var abovePiece = GameLoop.Instance.Board.PieceAt(aboveTile);
-
-                    if (abovePiece == null)
-                    {
-                        GameLoop.Instance.Board.Move(tile, aboveTile);
-                    }
+                    GameLoop.Instance.Board.Move(origin, destination);
                 }
             }
         }

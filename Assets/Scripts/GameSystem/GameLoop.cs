@@ -3,6 +3,7 @@ using Deck;
 using GameSystem.Modals;
 using GameSystem.MoveCommandsProviders;
 using GameSystem.States;
+using GameSystem.Utils;
 using GameSystem.Views;
 using MoveSystem;
 using ReplaySystem;
@@ -41,6 +42,9 @@ namespace GameSystem
 
         private void Awake()
         {
+            var enemyPlacer = GetComponent<RandomEnemyPlacer>();
+            enemyPlacer.PlaceRandomEnemies();
+
             ReplayManager replayManager = new ReplayManager();
             _stateMachine = new StateMachine<GameStateBase>();
 
@@ -59,7 +63,7 @@ namespace GameSystem
             ConnectTileViews(Board);
             ConnectBoardView(Board);
 
-            _stateMachine.MoveTo(GameStates.Play);
+            _stateMachine.MoveTo(GameStates.EnemyPhase1);
         }
 
         private void ConnectBoardView(Board<Modals.Piece> board)

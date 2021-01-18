@@ -32,6 +32,9 @@ namespace GameSystem.Modals
         public string MovementName  { get; internal set; }
 
         public int PlayerID { get; }
+
+        public List<Tile> QueuedPath = new List<Tile>();
+
         public Piece(int playerID, string name)
         {
             PlayerID = playerID;

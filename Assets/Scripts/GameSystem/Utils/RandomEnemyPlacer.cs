@@ -20,12 +20,7 @@ namespace GameSystem.Utils
         [SerializeField]
         private GameObject _enemyPrefab = null;
 
-        private void Awake()
-        {
-            PlaceRandomEnemies();
-        }
-
-        private void PlaceRandomEnemies()
+        public void PlaceRandomEnemies()
         {
             var spots = new List<CubicHexCoord>() { new CubicHexCoord() };
             var board = BoardPositionHelper.GenerateBoard(_boardSize);

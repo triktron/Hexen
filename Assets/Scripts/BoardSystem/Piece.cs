@@ -5,7 +5,7 @@ using UnityEngine.UIElements;
 
 namespace BoardSystem
 {
-    public class Piece
+/*    public class Piece
     {
         public int PlayerID { get; private set; }
 
@@ -15,5 +15,5 @@ namespace BoardSystem
         {
             PlayerID = playerID;
         }
-    }
+    }*/
 }
