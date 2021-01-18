@@ -13,8 +13,9 @@ namespace GameSystem.MoveProvider
     {
         public delegate bool Validator(Board<Modals.Piece> board, Modals.Piece piece, Tile toTile);
 
-        private Board<Modals.Piece> _board;
-        private Modals.Piece _piece;
+        private Board<Piece> _board;
+        private Piece _piece = null;
+        private Tile _tile = null;
         private List<Tile> _validTile = new List<Tile>();
 
         public MovementHelper(Board<Modals.Piece> board, Modals.Piece piece)
@@ -23,9 +24,18 @@ namespace GameSystem.MoveProvider
             _piece = piece;
         }
 
+        public MovementHelper(Board<Modals.Piece> board, Tile tile)
+        {
+            _board = board;
+            _tile = tile;
+        }
+
         public MovementHelper Collect(CubicHexCoord offset, int step = int.MaxValue, params Validator[] validators)
         {
-            Tile lastTile = _board.TileOf(_piece);
+            Tile lastTile = _tile;
+            if (_piece != null) lastTile = _board.TileOf(_piece);
+
+
             for (int count = 1; count <= step; count++)
             {
                 Tile tile = lastTile;

@@ -38,6 +38,8 @@ namespace GameSystem.States
                 {
                     GameLoop.Instance.Board.Move(origin, destination);
                 }
+
+                enemy.QueuedPath.Clear();
             }
         }
     }
