@@ -106,19 +106,27 @@ namespace GameSystem.States
 
         public override void Hover(Tile tile)
         {
-            if (_currentMoveComand == null || _playerPiece == null) return;
-
-            var tiles = _currentMoveComand.Tiles(_board, _playerPiece);
-            var action = _currentMoveComand.Action(_board, _playerPiece, tile);
-
             _board.UnHightlight(_board.Tiles);
 
-            if (tile != null && tiles.Contains(tile))
+            var piece = _board.PieceAt(tile);
+
+            if (piece != null && piece.PlayerID == 1 && _currentMoveComand == null)
             {
-                _board.Highlight(action);
-            } else
+                _board.Highlight(piece.QueuedPath);
+            } else if (_playerPiece != null && _currentMoveComand != null)
             {
-                _board.Highlight(tiles);
+                var tiles = _currentMoveComand.Tiles(_board, _playerPiece);
+                var action = _currentMoveComand.Action(_board, _playerPiece, tile);
+
+
+                if (tile != null && tiles.Contains(tile))
+                {
+                    _board.Highlight(action);
+                }
+                else
+                {
+                    _board.Highlight(tiles);
+                }
             }
         }
     }

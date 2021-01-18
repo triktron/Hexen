@@ -23,6 +23,8 @@ namespace GameSystem
 
         StateMachine<GameStateBase> _stateMachine;
 
+        private LayerMask _tileLayer;
+
         private void ConnectPieceViews(MoveManager<Modals.Piece> moveManager)
         {
             var pieceViews = FindObjectsOfType<PieceView>();
@@ -45,6 +47,8 @@ namespace GameSystem
             var enemyPlacer = GetComponent<RandomEnemyPlacer>();
             enemyPlacer.PlaceRandomEnemies();
 
+            _tileLayer = LayerMask.GetMask("Tiles");
+
             ReplayManager replayManager = new ReplayManager();
             _stateMachine = new StateMachine<GameStateBase>();
 
@@ -64,6 +68,11 @@ namespace GameSystem
             ConnectBoardView(Board);
 
             _stateMachine.MoveTo(GameStates.EnemyPhase1);
+        }
+
+        private void Update()
+        {
+            _stateMachine.CurrentSate.Hover(GetTileUnderMouse());
         }
 
         private void ConnectBoardView(Board<Modals.Piece> board)
@@ -90,9 +99,9 @@ namespace GameSystem
             moveManager.MoveComandProviderChanged += (sender, args) => moveCommandProviderView.Modal = args.MoveCommandProvider;
         }
 
-        public void Select(Tile tile)
+        public void Select()
         {
-            _stateMachine.CurrentSate.Select(tile);
+            _stateMachine.CurrentSate.Select(GetTileUnderMouse());
         }
         public void Select(IMoveCommand<Modals.Piece> moveComand)
         {
@@ -110,6 +119,19 @@ namespace GameSystem
         public void Backward()
         {
             _stateMachine.CurrentSate.Backward();
+        }
+
+        public Tile GetTileUnderMouse()
+        {
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out var hitInfo, 100, _tileLayer))
+            {
+                var tileView = hitInfo.transform.GetComponent<TileView>();
+                if (tileView == null) return null;
+
+                return tileView.Modal;
+            }
+
+            return null;
         }
     }
 
